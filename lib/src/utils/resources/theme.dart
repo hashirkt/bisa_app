@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class Theme{
+class AppTheme{
 
-  Theme._();
+  AppTheme._();
   //**************************
   //colors
   //**************************
@@ -12,6 +12,8 @@ class Theme{
 
   static const Color backColor = Colors.white;
   static const Color textColor = Colors.black;
+  static const Color smallText = Colors.grey;
+
 
 
 
@@ -35,9 +37,34 @@ class Theme{
   //**************************
 
   static  TextStyle headText = TextStyle(
+    color: textColor,
       fontFamily: figTreeFont.fontFamily,
-      fontSize: 12,
+      fontSize: 22,
+      fontWeight: FontWeight.w600);
+
+  static  TextStyle smallHead = TextStyle(
+      color: smallText,
+      fontFamily: figTreeFont.fontFamily,
+      fontSize: 16,
       fontWeight: FontWeight.w500);
+
+  static  TextStyle titleText = TextStyle(
+      color: textColor,
+      fontFamily: figTreeFont.fontFamily,
+      fontSize: 16,
+      fontWeight: FontWeight.w500);
+  static  TextStyle fieldText = TextStyle(
+      color: textColor,
+      fontFamily: figTreeFont.fontFamily,
+      fontSize: 16,
+      fontWeight: FontWeight.w600);
+
+  static  TextStyle buttonText = TextStyle(
+      color: backColor,
+      fontFamily: figTreeFont.fontFamily,
+      fontSize: 16,
+      fontWeight: FontWeight.w600);
+
 }
 
 
