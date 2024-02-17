@@ -1,6 +1,7 @@
 import 'package:bisa_app/src/presentation/register_screen/register_page.dart';
 import 'package:bisa_app/src/presentation/widget/pasword_textfield.dart';
 import 'package:bisa_app/src/presentation/widget/userid_textfield.dart';
+import 'package:bisa_app/src/utils/resources/asset_resources.dart';
 import 'package:bisa_app/src/utils/resources/theme.dart';
 import 'package:flutter/material.dart';
 import '../widget/button_widget.dart';
@@ -35,7 +36,7 @@ class _LoginPageState extends State<LoginPage> {
              const SizedBox(height: 50,),
               const HeadContainer(
                 headingText: 'LOGIN',
-                smallTitleText: 'Login to your Account',),
+                smallTitleText: 'Login to your Account', image: AssetImage(AssetResources.appLogo),containerHeight: 50,),
               const SizedBox(height: 100,),
               Container(
                 height: 335,
