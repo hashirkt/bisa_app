@@ -2,10 +2,10 @@
 import 'package:flutter/material.dart';
 import '../../utils/resources/theme.dart';
 
-class Head_Container extends StatelessWidget {
+class HeadContainer extends StatelessWidget {
   final String headingText;
   final String smallTitleText;
-  const Head_Container({super.key,required this.headingText,required this.smallTitleText});
+  const HeadContainer({super.key,required this.headingText,required this.smallTitleText});
 
   @override
   Widget build(BuildContext context) {

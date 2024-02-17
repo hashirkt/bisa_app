@@ -4,12 +4,19 @@ import 'package:bisa_app/src/utils/resources/theme.dart';
 import 'package:flutter/material.dart';
 import '../widget/head_container.dart';
 
-class Login_Page extends StatelessWidget {
-  Login_Page({super.key});
+class LoginPage extends StatefulWidget {
+ const LoginPage({super.key});
 
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   final TextEditingController _loginIdController = TextEditingController();
+
   final TextEditingController _passwordController = TextEditingController();
    bool show=true;
+
   final _loginKey = GlobalKey<FormState>();
 
   @override
@@ -24,7 +31,7 @@ class Login_Page extends StatelessWidget {
           children: [
             const Expanded(
                 flex: 5,
-                child: Head_Container(
+                child: HeadContainer(
               headingText: 'LOGIN',
               smallTitleText: 'Login to your Account',)),
 
@@ -38,9 +45,9 @@ class Login_Page extends StatelessWidget {
                   child: Column(crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       const SizedBox(height: 85,),
-                      UserId_TextField(controller: _loginIdController,),
+                      UserIdTextField(controller: _loginIdController,),
                       const SizedBox(height: 20,),
-                      Password_TextField( passController: _passwordController),
+                      PasswordTextField( passController: _passwordController),
                       const SizedBox(height: 10,),
                       Text("Forgot Password?",style: AppTheme.smallHead,),
                       const SizedBox(height: 50,),
