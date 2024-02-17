@@ -12,7 +12,7 @@ class HeadContainer extends StatelessWidget {
     return Container(
       height: 300,
       width: double.infinity,
-      color: Colors.transparent,
+      //color: Colors.red,
       child: Column(mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
