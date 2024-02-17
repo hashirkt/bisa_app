@@ -12,7 +12,7 @@ class UserId_TextField extends StatelessWidget {
     return Container(
       height: 95,
       width: double.infinity,
-      //color: Colors.red,
+      color: Colors.transparent,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -27,12 +27,12 @@ class UserId_TextField extends StatelessWidget {
               hintStyle: AppTheme.smallHead,
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(5),
-                borderSide: BorderSide(
+                borderSide: const BorderSide(
                     color: AppTheme.textColor,width: 1,style: BorderStyle.solid),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(5),
-                borderSide: BorderSide(
+                borderSide: const BorderSide(
                     color: AppTheme.textColor,width: 1,style: BorderStyle.solid),
               ),
             ),

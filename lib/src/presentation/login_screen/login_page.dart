@@ -32,7 +32,7 @@ class Login_Page extends StatelessWidget {
               flex: 7,
               child: Container(
                 width: double.infinity,
-               //color: Colors.blue,
+               color: Colors.transparent,
                 child: Form(
                   key: _loginKey,
                   child: Column(crossAxisAlignment: CrossAxisAlignment.end,
@@ -45,6 +45,7 @@ class Login_Page extends StatelessWidget {
                       Text("Forgot Password?",style: AppTheme.smallHead,),
                       const SizedBox(height: 50,),
                       Container(
+                        color: Colors.transparent,
                         width: double.infinity,
                         child: ElevatedButton(
                             onPressed: (){},
