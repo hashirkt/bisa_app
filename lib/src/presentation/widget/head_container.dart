@@ -3,10 +3,10 @@ import '../../utils/resources/theme.dart';
 
 class HeadContainer extends StatelessWidget {
   final String headingText;
-  final double containerHeight;
+  final double? containerHeight;
   final String smallTitleText;
   final ImageProvider? image;
-  const HeadContainer({super.key,required this.headingText,required this.smallTitleText,this.image,required this.containerHeight});
+  const HeadContainer({super.key,required this.headingText,required this.smallTitleText,this.image, this.containerHeight});
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +21,9 @@ class HeadContainer extends StatelessWidget {
             height: containerHeight,
             decoration: BoxDecoration(
             //color: Colors.red,
-                image: DecorationImage(
+                image:image !=null ? DecorationImage(
                   image: image! ,
-                )
+                ):null
             ),
           ),
           const SizedBox(height: 40,),
