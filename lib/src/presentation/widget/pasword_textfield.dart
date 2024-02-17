@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import '../../utils/resources/theme.dart';
 
-class Password_TextField extends StatefulWidget {
+class PasswordTextField extends StatefulWidget {
   final TextEditingController passController;
-  const Password_TextField({super.key,required this.passController});
+  const PasswordTextField({super.key,required this.passController});
 
   @override
-  State<Password_TextField> createState() => _Password_TextFieldState();
+  State<PasswordTextField> createState() => _PasswordTextFieldState();
 }
 
-class _Password_TextFieldState extends State<Password_TextField> {
+class _PasswordTextFieldState extends State<PasswordTextField> {
   bool show=true;
 
   @override

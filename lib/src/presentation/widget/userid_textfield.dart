@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import '../../utils/resources/theme.dart';
 
-class UserId_TextField extends StatelessWidget {
+class UserIdTextField extends StatelessWidget {
   final TextEditingController controller;
-   const UserId_TextField({
+   const UserIdTextField({
     super.key,required this.controller});
 
 
