@@ -18,33 +18,38 @@ class _OTPPageState extends State<OTPPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        padding: const EdgeInsets.only(left: 20,right: 20),
-        height: double.infinity,
-        width: double.infinity,
-        color: AppTheme.backColor,
-        child:  Column(
-          children: [
-            const SizedBox(height: 80,),
-            const HeadContainer(headingText: "ENTER YOUR OTP",
-                smallTitleText: "Otp Will be Send to Your Registered Email \nor Mobile Number",
-                image: AssetImage(AssetResources.otpIcon),containerHeight: 80,),
-            const SizedBox(height: 30,),
-            Container(
-              height: 200,
-              width: double.infinity,
-              //color: Colors.blue,
-              child: Pinput(
-                controller: _pinController,
-                length: 4,
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        body: Container(
+          padding: const EdgeInsets.only(left: 20,right: 20),
+          height: double.infinity,
+          width: double.infinity,
+          color: AppTheme.backColor,
+          child:  SingleChildScrollView(
+            child: Column(
+              children: [
+                const SizedBox(height: 80,),
+                const HeadContainer(headingText: "ENTER YOUR OTP",
+                    smallTitleText: "Otp Will be Send to Your Registered Email \nor Mobile Number",
+                    image: AssetImage(AssetResources.otpIcon),containerHeight: 80,),
+                const SizedBox(height: 30,),
+                Container(
+                  height: 200,
+                  width: double.infinity,
+                  //color: Colors.blue,
+                  child: Pinput(
+                    controller: _pinController,
+                    length: 4,
 
-              ),
+                  ),
+                ),
+                const SizedBox(height: 120,),
+                ButtonWidget(buttonTextContent: "GO",onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>const CreatePasswordPage())),)
+
+              ],
             ),
-            const SizedBox(height: 120,),
-            ButtonWidget(buttonTextContent: "GO",onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>const CreatePasswordPage())),)
-
-          ],
+          ),
         ),
       ),
     );
