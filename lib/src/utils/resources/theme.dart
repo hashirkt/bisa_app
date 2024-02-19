@@ -65,6 +65,24 @@ class AppTheme{
       fontSize: 16,
       fontWeight: FontWeight.w600);
 
+  static  TextStyle navigationText = TextStyle(
+      color: backColor,
+      fontFamily: figTreeFont.fontFamily,
+      fontSize: 12,
+      fontWeight: FontWeight.w600);
+
+  static  TextStyle tabText = TextStyle(
+      color: textColor,
+      fontFamily: figTreeFont.fontFamily,
+      fontSize: 18,
+      fontWeight: FontWeight.w600);
+
+  static  TextStyle tabText2 = TextStyle(
+      color: smallText,
+      fontFamily: figTreeFont.fontFamily,
+      fontSize: 18,
+      fontWeight: FontWeight.w600);
+
 }
 
 
