@@ -27,11 +27,11 @@ class _HomePageState extends State<HomePage> {
               IconButton(onPressed: (){}, icon: const Icon(Icons.notifications,color: AppTheme.backColor,))
             ],
             backgroundColor: AppTheme.textColor,
-            bottom:  PreferredSize(preferredSize: const Size.square(160), child: Column(
+            bottom:  PreferredSize(preferredSize: const Size.square(130), child: Column(
               children: [
                 Container(
 
-                  margin: const EdgeInsets.only(bottom: 20,left: 40,right: 40,),
+                  margin: const EdgeInsets.only(bottom: 15,left: 40,right: 40,),
                     padding: const EdgeInsets.only(left: 25,right: 5),
 
                     decoration: BoxDecoration(
@@ -40,7 +40,8 @@ class _HomePageState extends State<HomePage> {
                     child: const SearchTextField()
                 ),
                 Container(
-                  height: 70,
+                  height: 55,
+
                     width: double.infinity,
                     padding: const EdgeInsets.only(left: 18,right: 18),
 
@@ -77,25 +78,25 @@ class _HomePageState extends State<HomePage> {
 
                       CustomerNameField(nameText: 'Customer Name',
                         companyNameText: 'Customer Company Private Limited',
-                        checkedIcon: Icons.check_circle,),
+                        checkedIcon: Icons.check_circle, profileImage: AssetImage(AssetResources.userDp),),
                       CustomerNameField(nameText: 'Customer Name',
-                        companyNameText: 'Customer Company Private Limited',
+                        companyNameText: 'Customer Company Private Limited', profileImage: AssetImage(AssetResources.user1Dp),
                       ),
                       CustomerNameField(nameText: 'Customer Name',
                         companyNameText: 'Customer Company Private Limited',
-                        checkedIcon: Icons.check_circle,),
+                        checkedIcon: Icons.check_circle, profileImage: AssetImage(AssetResources.user1Dp),),
                       CustomerNameField(nameText: 'Customer Name',
-                        companyNameText: 'Customer Company Private Limited',),
-                      CustomerNameField(nameText: 'Customer Name',
-                        companyNameText: 'Customer Company Private Limited',
-                        checkedIcon: Icons.check_circle,),
-                      CustomerNameField(nameText: 'Customer Name',
-                        companyNameText: 'Customer Company Private Limited',),
+                        companyNameText: 'Customer Company Private Limited', profileImage: AssetImage(AssetResources.userDp),),
                       CustomerNameField(nameText: 'Customer Name',
                         companyNameText: 'Customer Company Private Limited',
-                        checkedIcon: Icons.check_circle,),
+                        checkedIcon: Icons.check_circle, profileImage: AssetImage(AssetResources.user2Dp),),
                       CustomerNameField(nameText: 'Customer Name',
-                        companyNameText: 'Customer Company Private Limited',),
+                        companyNameText: 'Customer Company Private Limited', profileImage: AssetImage(AssetResources.userDp),),
+                      CustomerNameField(nameText: 'Customer Name',
+                        companyNameText: 'Customer Company Private Limited',
+                        checkedIcon: Icons.check_circle, profileImage: AssetImage(AssetResources.user1Dp),),
+                      CustomerNameField(nameText: 'Customer Name',
+                        companyNameText: 'Customer Company Private Limited', profileImage: AssetImage(AssetResources.userDp),),
                     ],
                   ),
                 ),

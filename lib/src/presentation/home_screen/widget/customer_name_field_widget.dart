@@ -6,7 +6,8 @@ class CustomerNameField extends StatelessWidget {
   final String nameText;
   final String companyNameText;
   final IconData? checkedIcon;
-  const CustomerNameField({required this.nameText, required this.companyNameText,this.checkedIcon ,super.key,
+  final ImageProvider profileImage;
+  const CustomerNameField({required this.nameText, required this.companyNameText,this.checkedIcon ,required this.profileImage,super.key,
   });
 
   @override
@@ -26,10 +27,10 @@ class CustomerNameField extends StatelessWidget {
             height: 60,
             width: 60,
             decoration: BoxDecoration(
+              image: DecorationImage(image: profileImage,fit: BoxFit.cover),
                 borderRadius: BorderRadius.circular(100),
                 border: Border.all(color: AppTheme.smallText,width: 1)
             ),
-            child: const Icon(Icons.person_outlined,size: 40,color: AppTheme.smallText,),
           ),
           const SizedBox(width: 10,),
           Expanded(
