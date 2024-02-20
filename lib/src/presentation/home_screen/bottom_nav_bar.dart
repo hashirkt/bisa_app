@@ -1,4 +1,6 @@
 import 'package:bisa_app/src/presentation/home_screen/home_page.dart';
+import 'package:bisa_app/src/presentation/home_screen/more_page.dart';
+import 'package:bisa_app/src/utils/resources/asset_resources.dart';
 import 'package:bisa_app/src/utils/resources/theme.dart';
 import 'package:flutter/material.dart';
 
@@ -11,18 +13,21 @@ class BottomNavBarPage extends StatefulWidget {
 
 class _BottomNavBarPageState extends State<BottomNavBarPage> {
   int selectedIndex=0;
+  final GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
 
   final List<Widget> _list=[
     const HomePage(),
     const Text("data1"),
-    const Text("data2"),
 
   ];
 
   void onItemTapped(int index){
-    setState(() {
-      selectedIndex=index;
-    });
+   index == 2
+       ? _drawerKey.currentState!.openEndDrawer()
+       : setState(() {
+     selectedIndex=index;
+   });
+
   }
 
   @override
@@ -30,45 +35,46 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
     return   GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
+        key: _drawerKey,
         body: Center(
           child: _list.elementAt(selectedIndex),
         ),
-        bottomNavigationBar: Padding(
-          padding: const EdgeInsets.only(left: 20,right: 20),
-          child: Container(
 
-            margin: const EdgeInsets.only(bottom: 30),
-            width: double.infinity,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
-              color: AppTheme.textColor,
+        endDrawer: const MorePage(),
+        bottomNavigationBar:
+        Container(
+          padding: const EdgeInsets.only(bottom: 20,left: 20,right: 20),
+          width: double.infinity,
+          decoration: const BoxDecoration(
 
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(30),
-              child: BottomNavigationBar(
-                backgroundColor: AppTheme.textColor,
-                elevation: 0,
-                items: const <BottomNavigationBarItem>[
-                  BottomNavigationBarItem(
-                      icon: Icon(Icons.home_outlined,),
-                      label: "Home",
-                  ),
-                  BottomNavigationBarItem(
-                      icon: Icon(Icons.dashboard_outlined,),
-                      label: "Dashboard"
-                  ),
-                  BottomNavigationBarItem(
-                      icon: Icon(Icons.more_outlined,),
-                      label: "More"
-                  ),
-                ],
-                currentIndex: selectedIndex,
-                unselectedItemColor: Colors.grey,
-                selectedItemColor: AppTheme.backColor,
-                onTap: onItemTapped,
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(30),
+            child: BottomNavigationBar(
+              type: BottomNavigationBarType.fixed,
+              backgroundColor: AppTheme.textColor,
+              elevation: 0,
+              items:  const <BottomNavigationBarItem>[
+                BottomNavigationBarItem(
+                    icon: ImageIcon(AssetImage(AssetResources.homeIcon)),
+                    label: "Home",
+                ),
+                BottomNavigationBarItem(
+                    icon: ImageIcon(AssetImage(AssetResources.dashboardIcon)),
+                    label: "Dashboard"
+                ),
+                BottomNavigationBarItem(
+                    icon: ImageIcon(AssetImage(AssetResources.moreIcon)),
+                    label: "More",
 
-              ),
+                ),
+              ],
+              currentIndex: selectedIndex,
+              showUnselectedLabels: true,
+              unselectedItemColor: Colors.grey,
+              selectedItemColor: AppTheme.backColor,
+              onTap: onItemTapped,
+
             ),
           ),
         ),

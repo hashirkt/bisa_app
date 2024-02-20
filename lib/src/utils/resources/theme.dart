@@ -83,6 +83,18 @@ class AppTheme{
       fontSize: 18,
       fontWeight: FontWeight.w600);
 
+  static  TextStyle menuButtonText = TextStyle(
+      color: backColor,
+      fontFamily: figTreeFont.fontFamily,
+      fontSize: 20,
+      fontWeight: FontWeight.w500);
+
+  static  TextStyle pageHead = TextStyle(
+      color: textColor,
+      fontFamily: figTreeFont.fontFamily,
+      fontSize: 20,
+      fontWeight: FontWeight.w600);
+
 }
 
 
