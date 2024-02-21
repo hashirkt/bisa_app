@@ -2,10 +2,15 @@ import 'package:bisa_app/src/presentation/home_screen/create_card_page.dart';
 import 'package:bisa_app/src/presentation/home_screen/widget/menu_text_button_widget.dart';
 import 'package:bisa_app/src/utils/resources/asset_resources.dart';
 import 'package:bisa_app/src/utils/resources/theme.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class MorePage extends StatelessWidget {
   const MorePage({super.key});
+
+  void signUserOut(){
+    FirebaseAuth.instance.signOut();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +47,7 @@ class MorePage extends StatelessWidget {
             const MenuTextButtonWidget(buttonText: 'Settings', buttonImage:AssetImage(AssetResources.settingsIcon)),
             const MenuTextButtonWidget(buttonText: 'Feedback', buttonImage: AssetImage(AssetResources.feedbackIcon)),
             const MenuTextButtonWidget(buttonText: 'Partner With Us', buttonImage: AssetImage(AssetResources.partnerWithUs)),
-            const MenuTextButtonWidget(buttonText: 'Logout', buttonImage:AssetImage(AssetResources.logOut)),
+             MenuTextButtonWidget(buttonText: 'Logout', buttonImage:const AssetImage(AssetResources.logOut),onTap: signUserOut,),
 
           ],
 
