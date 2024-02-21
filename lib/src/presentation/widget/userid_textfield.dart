@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../utils/resources/theme.dart';
-
 class UserIdTextField extends StatefulWidget {
   final TextEditingController controller;
    const UserIdTextField({
@@ -14,10 +13,10 @@ class _UserIdTextFieldState extends State<UserIdTextField> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 110,
+      height: 100,
       width: double.infinity,
       decoration: const BoxDecoration(
-        //color: Colors.yellow,
+       // color: Colors.yellow,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -26,20 +25,30 @@ class _UserIdTextFieldState extends State<UserIdTextField> {
           const SizedBox(height: 5,),
           Container(
             decoration: const BoxDecoration(),
-            height: 80,
+            height: 75,
             child: TextFormField(
+              textInputAction: TextInputAction.next,
               validator: (value){
                 if(value!.isEmpty){
                   return "Field is mandatory";
+                } else if(value.contains(RegExp(r'^-?[0-9]+$'))&&
+                    (value.length!=10)
+                ){
+                  return "Phone number requires 10 numbers";
                 }
+                else if(!value.contains('@')){
+                  return "Email is badly formatted";
+                }
+
                 return null;
               },
               style: AppTheme.fieldText,
+
               cursorColor: AppTheme.textColor,
-              enableInteractiveSelection: false,
+              enableInteractiveSelection: true,
               controller: widget.controller,
               decoration: InputDecoration(
-                helperText: " ",
+               helperText: " ",
                 hintText: "Enter here...",
                 hintStyle: AppTheme.smallHead,
                 enabledBorder: OutlineInputBorder(
