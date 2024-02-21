@@ -5,14 +5,9 @@ import 'package:flutter/material.dart';
 
 import '../widget/search_text_field.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -75,7 +70,6 @@ class _HomePageState extends State<HomePage> {
                 child: const SingleChildScrollView(
                   child: Column(
                     children: [
-
                       CustomerNameField(nameText: 'Customer Name',
                         companyNameText: 'Customer Company Private Limited',
                         checkedIcon: Icons.check_circle, profileImage: AssetImage(AssetResources.userDp),),

@@ -15,15 +15,28 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 55,
+      height: 80,
      // color: Colors.blue,
       child: Center(
         child: TextFormField(
+          enableInteractiveSelection: false,
+          validator: (value){
+            if(value!.isEmpty){
+              return "Field is mandatory";
+            }else if(value.length<6){
+              return "Password must have 6 or more characters";
+            }
+            else{
+              return null;
+            }
+          },
+          controller: widget.passController,
           obscureText: show,
           obscuringCharacter: '*',
           style: AppTheme.fieldText,
           cursorColor: AppTheme.textColor,
           decoration: InputDecoration(
+            helperText: " ",
             prefixIcon: const Icon(Icons.lock_outline_rounded,color: AppTheme.textColor,size: 20,),
             suffixIcon: IconButton(  onPressed: () {
               setState(() {
@@ -41,6 +54,16 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
               borderRadius: BorderRadius.circular(5),
               borderSide: const BorderSide(
                   color: AppTheme.textColor,width: 1,style: BorderStyle.solid),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(5),
+              borderSide: const BorderSide(
+                  color: Colors.red,width: 1,style: BorderStyle.solid),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(5),
+              borderSide: const BorderSide(
+                  color: Colors.red,width: 1,style: BorderStyle.solid),
             ),
           ),
         ),
