@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:bisa_app/src/presentation/forgot_password_screen/forgot_password_page.dart';
 import 'package:bisa_app/src/presentation/register_screen/register_page.dart';
 import 'package:bisa_app/src/presentation/widget/pasword_textfield.dart';
 import 'package:bisa_app/src/presentation/widget/userid_textfield.dart';
@@ -25,10 +28,41 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
   void signUserIn()async{
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: _loginIdController.text,
-        password: _passwordController.text);
+    showDialog(context: context, builder: (context){
+      return const Center(child: CircularProgressIndicator(
+        color: AppTheme.textColor,
+      ));
+    });
+    try{
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: _loginIdController.text,
+          password: _passwordController.text);
+    } on FirebaseAuthException catch (e) {
+      log("firebase auth exception => ${e.code}");
+      // if(e.code == 'user-not-found'){
+      //   wrongEmailMessage();
+      // }else if(e.code == 'wrong-password'){
+      //   wrongPasswordMessage();
+      // }
+      if(e.code == 'invalid-credential'){
+        _showSnackBar("Incorrect Login credential");
+      }
+    }
+    Navigator.pop(context);
   }
+  // void wrongMessage(){
+  //   showDialog(context: context, builder: (context){
+  //     return const AlertDialog(title: Text("Email/Password incorrect"),);
+  //   });
+  // }
+  void _showSnackBar(String message){
+    ScaffoldMessenger.of(context).showSnackBar(
+       SnackBar(
+           behavior: SnackBarBehavior.floating,
+           content: Text(message))
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return  GestureDetector(
@@ -56,9 +90,14 @@ class _LoginPageState extends State<LoginPage> {
                       children: [
                        // const SizedBox(height: 20,),
                         UserIdTextField(controller: _loginIdController,),
-                        PasswordTextField( passController: _passwordController),
-                        const SizedBox(height: 10,),
-                        Text("Forgot Password?",style: AppTheme.smallHead,),
+                        PasswordTextField( passController: _passwordController,onSubmitted: (value){
+                          if(_loginKey.currentState!.validate()){
+                            signUserIn();
+                          }
+                        },),
+                        InkWell(
+                            onTap:()=> Navigator.push(context, MaterialPageRoute(builder: (context)=>ForgotPasswordPage())),
+                            child: Text("Forgot Password?",style: AppTheme.smallHead,)),
                         const SizedBox(height: 50,),
                          ButtonWidget(buttonTextContent: 'START',onPressed:() async{
                            if(_loginKey.currentState!.validate()){
