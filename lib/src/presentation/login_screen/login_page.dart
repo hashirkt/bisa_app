@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:bisa_app/src/presentation/forgot_password_screen/forgot_password_page.dart';
 import 'package:bisa_app/src/presentation/register_screen/register_page.dart';
 import 'package:bisa_app/src/presentation/widget/pasword_textfield.dart';
@@ -19,7 +18,6 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final TextEditingController _loginIdController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-   bool isLoading=false;
   final _loginKey = GlobalKey<FormState>();
   @override
   void dispose() {
@@ -39,22 +37,12 @@ class _LoginPageState extends State<LoginPage> {
           password: _passwordController.text);
     } on FirebaseAuthException catch (e) {
       log("firebase auth exception => ${e.code}");
-      // if(e.code == 'user-not-found'){
-      //   wrongEmailMessage();
-      // }else if(e.code == 'wrong-password'){
-      //   wrongPasswordMessage();
-      // }
       if(e.code == 'invalid-credential'){
         _showSnackBar("Incorrect Login credential");
       }
     }
     Navigator.pop(context);
   }
-  // void wrongMessage(){
-  //   showDialog(context: context, builder: (context){
-  //     return const AlertDialog(title: Text("Email/Password incorrect"),);
-  //   });
-  // }
   void _showSnackBar(String message){
     ScaffoldMessenger.of(context).showSnackBar(
        SnackBar(
@@ -104,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
                              signUserIn();
                            }
                          } ,),
-                        const SizedBox(height:20,),
+                        const SizedBox(height:40,),
                         InkWell(
                           onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>const RegisterPage())),
                           child: Row(mainAxisAlignment: MainAxisAlignment.center,

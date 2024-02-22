@@ -17,7 +17,9 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
   Widget build(BuildContext context) {
     return Container(
       height: 75,
-     //color: Colors.blue,
+     decoration: const BoxDecoration(
+       //color: Colors.blue,
+     ),
       child: TextFormField(
         enableInteractiveSelection: true,
         textAlignVertical: TextAlignVertical.bottom,

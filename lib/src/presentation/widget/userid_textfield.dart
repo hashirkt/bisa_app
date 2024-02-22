@@ -1,15 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../../utils/resources/theme.dart';
 class UserIdTextField extends StatefulWidget {
   final TextEditingController controller;
+  final void Function(String)? onSubmitted;
    const UserIdTextField({
-    super.key,required this.controller});
+    super.key,required this.controller,this.onSubmitted});
 
   @override
   State<UserIdTextField> createState() => _UserIdTextFieldState();
 }
 
 class _UserIdTextFieldState extends State<UserIdTextField> {
+  bool isEmail(String input) =>  RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+      .hasMatch(input);
+
+  bool isPhone(String input) => RegExp(
+      r'^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$'
+  ).hasMatch(input);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,19 +36,15 @@ class _UserIdTextFieldState extends State<UserIdTextField> {
             decoration: const BoxDecoration(),
             height: 75,
             child: TextFormField(
+              onFieldSubmitted: widget.onSubmitted,
+              inputFormatters: [
+                FilteringTextInputFormatter.deny(RegExp(r'[+]')),
+              ],
               textInputAction: TextInputAction.next,
               validator: (value){
-                if(value!.isEmpty){
-                  return "Field is mandatory";
-                } else if(value.contains(RegExp(r'^-?[0-9]+$'))&&
-                    (value.length!=10)
-                ){
-                  return "Phone number requires 10 numbers";
+                if (!isEmail(value!) && !isPhone(value)) {
+                  return 'Please enter a valid email or phone number.';
                 }
-                else if(!value.contains('@')){
-                  return "Email is badly formatted";
-                }
-
                 return null;
               },
               style: AppTheme.fieldText,
