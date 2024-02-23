@@ -3,19 +3,21 @@ import 'package:bisa_app/src/presentation/widget/button_widget.dart';
 import 'package:bisa_app/src/presentation/widget/head_container.dart';
 import 'package:bisa_app/src/utils/resources/asset_resources.dart';
 import 'package:bisa_app/src/utils/resources/theme.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 
 class OTPPage extends StatefulWidget {
-  const OTPPage({super.key});
+  final String? phoneNumber;
+  final String verificationId;
+  const OTPPage({super.key,this.phoneNumber,required this.verificationId});
 
   @override
   State<OTPPage> createState() => _OTPPageState();
 }
-
 class _OTPPageState extends State<OTPPage> {
   final TextEditingController _pinController = TextEditingController();
-
+  FirebaseAuth auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -40,12 +42,20 @@ class _OTPPageState extends State<OTPPage> {
                   //color: Colors.blue,
                   child: Pinput(
                     controller: _pinController,
-                    length: 4,
+                    length: 6,
 
                   ),
                 ),
                 const SizedBox(height: 120,),
-                ButtonWidget(buttonTextContent: "GO",onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>const CreatePasswordPage())),)
+                ButtonWidget(buttonTextContent: "GO",onPressed: ()async{
+                  PhoneAuthCredential credential = PhoneAuthProvider.credential(
+                      verificationId: widget.verificationId,
+                      smsCode: _pinController.text);
+                  await auth.signInWithCredential(credential).then((value) {
+                    Navigator.push(context, MaterialPageRoute(builder: (
+                        context) => const CreatePasswordPage()));
+                  });
+                })
 
               ],
             ),
