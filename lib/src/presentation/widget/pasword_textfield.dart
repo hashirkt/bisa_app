@@ -4,7 +4,8 @@ import '../../utils/resources/theme.dart';
 class PasswordTextField extends StatefulWidget {
   final TextEditingController passController;
   final void Function(String)? onSubmitted;
-  const PasswordTextField({super.key,required this.passController,this.onSubmitted});
+  final TextInputAction textInputAction;
+  const PasswordTextField({super.key,required this.passController,this.onSubmitted,required this.textInputAction});
 
   @override
   State<PasswordTextField> createState() => _PasswordTextFieldState();

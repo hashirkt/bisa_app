@@ -4,8 +4,9 @@ import '../../utils/resources/theme.dart';
 class UserIdTextField extends StatefulWidget {
   final TextEditingController controller;
   final void Function(String)? onSubmitted;
+  final TextInputAction textInputAction;
    const UserIdTextField({
-    super.key,required this.controller,this.onSubmitted});
+    super.key,required this.controller,this.onSubmitted,required this.textInputAction});
 
   @override
   State<UserIdTextField> createState() => _UserIdTextFieldState();
@@ -37,10 +38,7 @@ class _UserIdTextFieldState extends State<UserIdTextField> {
             height: 75,
             child: TextFormField(
               onFieldSubmitted: widget.onSubmitted,
-              inputFormatters: [
-                FilteringTextInputFormatter.deny(RegExp(r'[+]')),
-              ],
-              textInputAction: TextInputAction.next,
+              textInputAction: widget.textInputAction,
               validator: (value){
                 if (!isEmail(value!) && !isPhone(value)) {
                   return 'Please enter a valid email or phone number.';

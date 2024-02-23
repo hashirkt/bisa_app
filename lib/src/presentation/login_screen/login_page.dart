@@ -1,10 +1,13 @@
 import 'dart:developer';
+import 'package:bisa_app/src/domain/models/user_model.dart';
 import 'package:bisa_app/src/presentation/forgot_password_screen/forgot_password_page.dart';
+import 'package:bisa_app/src/presentation/home_screen/bottom_nav_bar.dart';
 import 'package:bisa_app/src/presentation/register_screen/register_page.dart';
 import 'package:bisa_app/src/presentation/widget/pasword_textfield.dart';
 import 'package:bisa_app/src/presentation/widget/userid_textfield.dart';
 import 'package:bisa_app/src/utils/resources/asset_resources.dart';
 import 'package:bisa_app/src/utils/resources/theme.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../widget/button_widget.dart';
@@ -19,6 +22,8 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _loginIdController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final _loginKey = GlobalKey<FormState>();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  UserModel user = UserModel();
   @override
   void dispose() {
     _loginIdController.dispose();
@@ -32,14 +37,40 @@ class _LoginPageState extends State<LoginPage> {
       ));
     });
     try{
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: _loginIdController.text,
-          password: _passwordController.text);
+      _auth.signInAnonymously();
+      if(_loginIdController.text.contains(RegExp(r'^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$'))){
+        final userSnapshot = await FirebaseFirestore.instance.collection('users').where('phonecontroller',isEqualTo: _loginIdController.text.trim()).where('password',isEqualTo: _passwordController.text.trim()).get();
+        if(userSnapshot.docs.isNotEmpty){
+          _showSnackBar("Login Successful");
+          Future.delayed(Duration(seconds: 1),(){
+            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>const BottomNavBarPage()), (route) => false);
+          });
+        }else{
+          _showSnackBar("No user found");
+        }
+      }else{
+        final userSnapshot = await FirebaseFirestore.instance.collection('users').where('email',isEqualTo: _loginIdController.text.trim()).where('password',isEqualTo: _passwordController.text.trim()).get();
+        if(userSnapshot.docs.isNotEmpty){
+          _showSnackBar("Login Successful");
+          Future.delayed(Duration(seconds: 1),(){
+            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>const BottomNavBarPage()), (route) => false);
+          });
+        }else{
+          _showSnackBar("No user found");
+        }
+      }
+
+      // await FirebaseAuth.instance.signInWithEmailAndPassword(
+      //     email: _loginIdController.text,
+      //     password: _passwordController.text);
     } on FirebaseAuthException catch (e) {
       log("firebase auth exception => ${e.code}");
       if(e.code == 'invalid-credential'){
         _showSnackBar("Incorrect Login credential");
       }
+    }catch (e){
+      print(e);
+      _showSnackBar("Failed to login");
     }
     Navigator.pop(context);
   }
@@ -77,8 +108,8 @@ class _LoginPageState extends State<LoginPage> {
                     child: Column(crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                        // const SizedBox(height: 20,),
-                        UserIdTextField(controller: _loginIdController,),
-                        PasswordTextField( passController: _passwordController,onSubmitted: (value){
+                        UserIdTextField(controller: _loginIdController,textInputAction: TextInputAction.next,),
+                        PasswordTextField(textInputAction: TextInputAction.done, passController: _passwordController,onSubmitted: (value){
                           if(_loginKey.currentState!.validate()){
                             signUserIn();
                           }
@@ -92,20 +123,26 @@ class _LoginPageState extends State<LoginPage> {
                              signUserIn();
                            }
                          } ,),
-                        const SizedBox(height:40,),
+                        const SizedBox(height:30,),
                         InkWell(
                           onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>const RegisterPage())),
-                          child: Row(mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              RichText(text: TextSpan(
-                                text: "You don't have an Account? ",style: AppTheme.smallHead,
-                                children: [
-                                  TextSpan(
-                                    text: "Register",style: AppTheme.fieldText
-                                  )
-                                ]
-                              )),
-                            ],
+                          child: Container(
+                            height: 40,
+                            decoration: BoxDecoration(
+                              //color: Colors.red
+                            ),
+                            child: Row(mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                RichText(text: TextSpan(
+                                  text: "You don't have an Account? ",style: AppTheme.smallHead,
+                                  children: [
+                                    TextSpan(
+                                      text: "Register",style: AppTheme.fieldText
+                                    )
+                                  ]
+                                )),
+                              ],
+                            ),
                           ),
                         )
 
