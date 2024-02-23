@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:bisa_app/src/presentation/create_password_screen/create_password_page.dart';
 import 'package:bisa_app/src/presentation/widget/button_widget.dart';
 import 'package:bisa_app/src/presentation/widget/head_container.dart';
@@ -20,6 +18,8 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   TextEditingController loginIdController=TextEditingController();
+
+
   final _signUpKey = GlobalKey<FormState>();
   FirebaseAuth auth = FirebaseAuth.instance;
   void _showSnackBar(String message){
@@ -48,16 +48,12 @@ class _RegisterPageState extends State<RegisterPage> {
           codeSent: (String verificationId,int? resendToken){
             Navigator.push(context, MaterialPageRoute(builder: (context)=> OTPPage(phoneNumber: loginIdController.text,verificationId: verificationId,)));
           },
-          codeAutoRetrievalTimeout: (String verificationId){
-            _showSnackBar("OTP timeout");
-          }
+          codeAutoRetrievalTimeout: (String verificationId){}
 );
     }on FirebaseAuthException catch (e){
       _showSnackBar(e.code);
     }
-    Navigator.pop(context);
   }
-
   void addEmail()async{
     showDialog(context: context, builder: (context){
       return const Center(child: CircularProgressIndicator(
@@ -68,12 +64,12 @@ class _RegisterPageState extends State<RegisterPage> {
       await FirebaseFirestore.instance.collection('users').add({
         'email':loginIdController.text
       }).then((value) => {
-      Navigator.push(context, MaterialPageRoute(builder: (context)=>const CreatePasswordPage())),
+      Navigator.push(context, MaterialPageRoute(builder: (context)=> CreatePasswordPage(emailId: loginIdController.text,))),
       });
     }on FirebaseAuthException catch (e){
       _showSnackBar(e.code);
     }
-    Navigator.pop(context);
+
   }
   @override
   void dispose() {
@@ -101,8 +97,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       headingText: "REGISTER",
                       smallTitleText: "Register your Account",image: AssetImage(AssetResources.appLogo),containerHeight: 50,),
                   const SizedBox(height: 150,),
-                  UserIdTextField(controller: loginIdController,onSubmitted: (value){
-                    if(_signUpKey.currentState!.validate()){
+                  UserIdTextField(controller: loginIdController,textInputAction:TextInputAction.done,onSubmitted: (value){
                       if(_signUpKey.currentState!.validate()&&
                           loginIdController.text.contains(RegExp(r'^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$'))
                       ){
@@ -114,7 +109,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         addEmail();
                       }
 
-                    }
+
                   },),
                   const SizedBox(height: 150,),
                    ButtonWidget(buttonTextContent: "SUBMIT",onPressed: ()async{
@@ -122,7 +117,6 @@ class _RegisterPageState extends State<RegisterPage> {
                      loginIdController.text.contains(RegExp(r'^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$'))
                      ){
                        verifyPhoneNumber();
-
                      }else if(_signUpKey.currentState!.validate()&&
                          loginIdController.text.contains(RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+"))
                      ){

@@ -3,6 +3,7 @@ import 'package:bisa_app/src/presentation/widget/button_widget.dart';
 import 'package:bisa_app/src/presentation/widget/head_container.dart';
 import 'package:bisa_app/src/utils/resources/asset_resources.dart';
 import 'package:bisa_app/src/utils/resources/theme.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
@@ -48,12 +49,21 @@ class _OTPPageState extends State<OTPPage> {
                 ),
                 const SizedBox(height: 120,),
                 ButtonWidget(buttonTextContent: "GO",onPressed: ()async{
+                  showDialog(context: context, builder: (context){
+                    return const Center(child: CircularProgressIndicator(
+                      color: AppTheme.textColor,
+                    ));
+                  });
                   PhoneAuthCredential credential = PhoneAuthProvider.credential(
                       verificationId: widget.verificationId,
                       smsCode: _pinController.text);
+                  await FirebaseFirestore.instance.collection('users').add(
+                      {
+                        'phoneNumber':widget.phoneNumber
+                      });
                   await auth.signInWithCredential(credential).then((value) {
                     Navigator.push(context, MaterialPageRoute(builder: (
-                        context) => const CreatePasswordPage()));
+                        context) =>  CreatePasswordPage(phoneNumber: widget.phoneNumber,)));
                   });
                 })
 
