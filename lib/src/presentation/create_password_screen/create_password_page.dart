@@ -4,12 +4,13 @@ import 'package:bisa_app/src/presentation/widget/head_container.dart';
 import 'package:bisa_app/src/presentation/widget/pasword_textfield.dart';
 import 'package:bisa_app/src/utils/resources/theme.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'dart:developer';
 class CreatePasswordPage extends StatefulWidget {
   final String? phoneNumber;
   final String? emailId;
-  const CreatePasswordPage({super.key,this.phoneNumber,this.emailId});
+  const CreatePasswordPage({super.key,this.phoneNumber,this.emailId,});
   @override
   State<CreatePasswordPage> createState() => _CreatePasswordPageState();
 }
@@ -25,6 +26,39 @@ class _CreatePasswordPageState extends State<CreatePasswordPage> {
     );
   }
   final _passPageKey = GlobalKey<FormState>();
+  // void createPasswordPhone()async{
+  //   showDialog(context: context, builder: (context){
+  //     return const Center(child: CircularProgressIndicator(
+  //       color: AppTheme.textColor,
+  //     ));
+  //   });
+  //   try{
+  //     await FirebaseFirestore.instance.collection('users').where(
+  //       'phoneNumber',isEqualTo: widget.phoneNumber)
+  //         .get().then((QuerySnapshot querySnapshot){
+  //         if(querySnapshot.docs.isNotEmpty){
+  //           querySnapshot.docs.forEach((doc) {
+  //             doc.reference.update({'password':_passController.text}).then((value) {
+  //               _showSnackBar("Password created");
+  //               Future.delayed(const Duration(seconds: 1),(){
+  //                 Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>const LoginPage()), (route) => false);
+  //               });
+  //             }).catchError((error){
+  //               _showSnackBar("Error: $error");
+  //             });
+  //           });
+  //         }else{
+  //           _showSnackBar("User not found");
+  //         }
+  //     }).catchError((error){
+  //       _showSnackBar("Error: $error");
+  //     });
+  //
+  //   }on FirebaseException catch (e){
+  //     _showSnackBar(e.code);
+  //   }
+  //   Navigator.pop(context);
+  // }
   void createPasswordPhone()async{
     showDialog(context: context, builder: (context){
       return const Center(child: CircularProgressIndicator(
@@ -32,29 +66,17 @@ class _CreatePasswordPageState extends State<CreatePasswordPage> {
       ));
     });
     try{
-      await FirebaseFirestore.instance.collection('users').where(
-        'phoneNumber',isEqualTo: widget.phoneNumber )
-          .get().then((QuerySnapshot querySnapshot){
-
-          if(querySnapshot.docs.isNotEmpty){
-            querySnapshot.docs.forEach((doc) {
-              doc.reference.update({'password':_passController.text}).then((value) {
-                _showSnackBar("Password created");
-                Future.delayed(const Duration(seconds: 1),(){
-                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>const LoginPage()), (route) => false);
-                });
-              }).catchError((error){
-                _showSnackBar("Error: $error");
-              });
-            });
-          }else{
-            _showSnackBar("User not found");
-          }
-      }).catchError((error){
-        _showSnackBar("Error: $error");
+      FirebaseAuth.instance.signInAnonymously().then((value) => {
+        FirebaseFirestore.instance.collection('users').doc(value.user!.uid).set({
+          'id': value.user!.uid,
+          'phoneNumber':widget.phoneNumber,
+          'password': _passController.text,
+        }).then((value) {
+          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>const LoginPage()), (route) => false);
+          _showSnackBar("Password created");
+        })
       });
-
-    }on FirebaseException catch (e){
+       }on FirebaseException catch (e){
       _showSnackBar(e.code);
     }
     Navigator.pop(context);
@@ -67,33 +89,22 @@ class _CreatePasswordPageState extends State<CreatePasswordPage> {
     });
     try{
       log("email => ${widget.emailId}");
-      await FirebaseFirestore.instance.collection('users').where(
-        'email',isEqualTo:widget.emailId)
-          .get().then((QuerySnapshot querySnapshot){
-            log("email => ${widget.emailId}");
-          if(querySnapshot.docs.isNotEmpty){
-            querySnapshot.docs.forEach((doc) {
-              doc.reference.update({'password':_passController.text}).then((value) {
-                _showSnackBar("Password created");
-                Future.delayed(const Duration(seconds: 1),(){
-                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>const LoginPage()), (route) => false);
-                });
-              }).catchError((error){
-                _showSnackBar("Error: $error");
-              });
-            });
-          }else{
-            _showSnackBar("User not found");
-          }
-      }).catchError((error){
-        _showSnackBar("Error: $error");
+      FirebaseAuth.instance.createUserWithEmailAndPassword(email: widget.emailId!, password: _passController.text).then((value) {
+        FirebaseFirestore.instance.collection('users').doc(value.user!.uid).set({
+          'id': value.user!.uid,
+          'email':widget.emailId,
+          'password': _passController.text,
+        }).then((value) {
+          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>const LoginPage()), (route) => false);
+          _showSnackBar("Password created");
+        });
       });
-
-    }on FirebaseException catch (e){
+    }on FirebaseAuthException catch (e){
       _showSnackBar(e.code);
     }
     Navigator.pop(context);
   }
+
 
   @override
   Widget build(BuildContext context) {

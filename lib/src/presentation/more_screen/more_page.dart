@@ -8,8 +8,8 @@ import 'package:flutter/material.dart';
 class MorePage extends StatelessWidget {
   const MorePage({super.key});
 
-  void signUserOut(){
-    FirebaseAuth.instance.signOut();
+  void signUserOut()async{
+   await FirebaseAuth.instance.signOut();
   }
 
   @override
@@ -47,7 +47,7 @@ class MorePage extends StatelessWidget {
             const MenuTextButtonWidget(buttonText: 'Settings', buttonImage:AssetImage(AssetResources.settingsIcon)),
             const MenuTextButtonWidget(buttonText: 'Feedback', buttonImage: AssetImage(AssetResources.feedbackIcon)),
             const MenuTextButtonWidget(buttonText: 'Partner With Us', buttonImage: AssetImage(AssetResources.partnerWithUs)),
-             MenuTextButtonWidget(buttonText: 'Logout', buttonImage:const AssetImage(AssetResources.logOut),onTap: signUserOut,),
+            MenuTextButtonWidget(buttonText: 'Logout', buttonImage:const AssetImage(AssetResources.logOut),onTap: signUserOut,),
 
           ],
 

@@ -1,5 +1,4 @@
 import 'dart:developer';
-import 'package:bisa_app/src/domain/models/user_model.dart';
 import 'package:bisa_app/src/presentation/forgot_password_screen/forgot_password_page.dart';
 import 'package:bisa_app/src/presentation/home_screen/bottom_nav_bar.dart';
 import 'package:bisa_app/src/presentation/register_screen/register_page.dart';
@@ -13,7 +12,9 @@ import 'package:flutter/material.dart';
 import '../widget/button_widget.dart';
 import '../widget/head_container.dart';
 class LoginPage extends StatefulWidget {
- const LoginPage({super.key});
+  final String? phoneNumber;
+  final String? emailId;
+ const LoginPage({super.key,this.emailId,this.phoneNumber});
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
@@ -23,63 +24,85 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _passwordController = TextEditingController();
   final _loginKey = GlobalKey<FormState>();
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  UserModel user = UserModel();
-  @override
-  void dispose() {
-    _loginIdController.dispose();
-    _passwordController.dispose();
-    super.dispose();
-  }
-  void signUserIn()async{
+ // @override
+  // void dispose() {
+  //   _loginIdController.dispose();
+  //   _passwordController.dispose();
+  //   super.dispose();
+  // }
+
+
+  void signUserInPhone() async{
     showDialog(context: context, builder: (context){
       return const Center(child: CircularProgressIndicator(
         color: AppTheme.textColor,
       ));
     });
     try{
-      _auth.signInAnonymously();
-      if(_loginIdController.text.contains(RegExp(r'^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$'))){
-        final userSnapshot = await FirebaseFirestore.instance.collection('users').where('phonecontroller',isEqualTo: _loginIdController.text.trim()).where('password',isEqualTo: _passwordController.text.trim()).get();
-        if(userSnapshot.docs.isNotEmpty){
-          _showSnackBar("Login Successful");
-          Future.delayed(Duration(seconds: 1),(){
-            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>const BottomNavBarPage()), (route) => false);
-          });
-        }else{
-          _showSnackBar("No user found");
-        }
+      await _auth.signInAnonymously();
+      final userSnapshot = await FirebaseFirestore.instance.collection('users').where('phoneNumber',isEqualTo: _loginIdController.text.trim()).where('password',isEqualTo: _passwordController.text.trim()).get();
+      if(userSnapshot.docs.isNotEmpty){
+        Future.delayed(const Duration(seconds: 4),(){
+          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>const BottomNavBarPage()), (route) => false);
+        });
+        log("error: $Error");
+        _showSnackBar("Login Successful");
+        Navigator.pop(context);
       }else{
-        final userSnapshot = await FirebaseFirestore.instance.collection('users').where('email',isEqualTo: _loginIdController.text.trim()).where('password',isEqualTo: _passwordController.text.trim()).get();
-        if(userSnapshot.docs.isNotEmpty){
-          _showSnackBar("Login Successful");
-          Future.delayed(Duration(seconds: 1),(){
-            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>const BottomNavBarPage()), (route) => false);
-          });
-        }else{
-          _showSnackBar("No user found");
-        }
+        _showSnackBar("No user found");
       }
-
-      // await FirebaseAuth.instance.signInWithEmailAndPassword(
-      //     email: _loginIdController.text,
-      //     password: _passwordController.text);
-    } on FirebaseAuthException catch (e) {
-      log("firebase auth exception => ${e.code}");
-      if(e.code == 'invalid-credential'){
-        _showSnackBar("Incorrect Login credential");
+    }on FirebaseAuthException catch (e){
+      if(e.code == 'wrong-password'){
+        _showSnackBar(e.code);
       }
     }catch (e){
-      print(e);
+      log(e.toString());
       _showSnackBar("Failed to login");
     }
+  }
+
+  void signUserInEmail() async{
+    showDialog(context: context, builder: (context){
+      return const Center(child: CircularProgressIndicator(
+        color: AppTheme.textColor,
+      ));
+    });
+    try{
+     final userSnapshot = await FirebaseAuth.instance.signInWithEmailAndPassword(email: _loginIdController.text,
+         password: _passwordController.text).then((user) =>
+     FirebaseFirestore.instance.collection('users').doc(user.user!.uid).get());
+    if(userSnapshot.data()!.isNotEmpty){ if(mounted) {
+      _showSnackBar("Login successful");}
+      Future.delayed(const Duration(seconds: 1),(){
+        // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>const BottomNavBarPage()), (route) => false);
+      });
+    }else{
+      if(mounted) {
+      _showSnackBar("No user found");}
+    }
+    }on FirebaseAuthException catch (e){
+      if(mounted) {
+        _showSnackBar(e.code);}
+    }catch (e){
+      log("Error: $Error");
+      if(mounted) {
+        _showSnackBar("Failed to login");
+      }    }
     Navigator.pop(context);
   }
   void _showSnackBar(String message){
+    if(mounted){
     ScaffoldMessenger.of(context).showSnackBar(
        SnackBar(
            behavior: SnackBarBehavior.floating,
            content: Text(message))
-    );
+    );}
+  }
+  @override
+  void dispose() {
+   _loginIdController.dispose();
+   _passwordController.dispose();
+    super.dispose();
   }
 
   @override
@@ -109,9 +132,15 @@ class _LoginPageState extends State<LoginPage> {
                       children: [
                        // const SizedBox(height: 20,),
                         UserIdTextField(controller: _loginIdController,textInputAction: TextInputAction.next,),
-                        PasswordTextField(textInputAction: TextInputAction.done, passController: _passwordController,onSubmitted: (value){
-                          if(_loginKey.currentState!.validate()){
-                            signUserIn();
+                        PasswordTextField(textInputAction: TextInputAction.done, passController: _passwordController,onSubmitted: (value) async{
+                          if(_loginKey.currentState!.validate() &&
+                              _loginIdController.text.isNotEmpty &&
+                              _passwordController.text.length>5 &&
+                              _loginIdController.text.contains(RegExp(r'^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$'))
+                          ){
+                            signUserInPhone();
+                          }else{
+                            signUserInEmail();
                           }
                         },),
                         InkWell(
@@ -119,9 +148,17 @@ class _LoginPageState extends State<LoginPage> {
                             child: Text("Forgot Password?",style: AppTheme.smallHead,)),
                         const SizedBox(height: 50,),
                          ButtonWidget(buttonTextContent: 'START',onPressed:() async{
-                           if(_loginKey.currentState!.validate()){
-                             signUserIn();
+                           if(_loginKey.currentState!.validate() &&
+                               _loginIdController.text.isNotEmpty &&
+                               _passwordController.text.length>5 &&
+                               _loginIdController.text.contains(RegExp(r'^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$'))
+                           ){
+                             signUserInPhone();
+                           }else{
+                             signUserInEmail();
                            }
+
+
                          } ,),
                         const SizedBox(height:30,),
                         InkWell(
