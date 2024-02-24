@@ -29,15 +29,13 @@ class _RegisterPageState extends State<RegisterPage> {
             content: Text(message))
     );
   }
-
   void verifyPhoneNumber()async{
     showDialog(context: context, builder: (context){
       return const Center(child: CircularProgressIndicator(
         color: AppTheme.textColor,
       ));
     });
-    try{
-      await auth.verifyPhoneNumber(
+    try{await auth.verifyPhoneNumber(
           phoneNumber:"+91${loginIdController.text}",
           verificationCompleted: (PhoneAuthCredential credential){
             _showSnackBar("OTP sent");
@@ -47,9 +45,15 @@ class _RegisterPageState extends State<RegisterPage> {
           },
           codeSent: (String verificationId,int? resendToken){
             Navigator.push(context, MaterialPageRoute(builder: (context)=> OTPPage(phoneNumber: loginIdController.text,verificationId: verificationId,)));
-          },
+            },
+
           codeAutoRetrievalTimeout: (String verificationId){}
 );
+     final uuid= FirebaseAuth.instance.currentUser!.uid;
+     FirebaseFirestore.instance.collection('userCredential').doc(uuid).set({
+       'id':uuid,
+       'phoneNumber': loginIdController.text,
+     });
     }on FirebaseAuthException catch (e){
       _showSnackBar(e.code);
     }
@@ -61,7 +65,7 @@ class _RegisterPageState extends State<RegisterPage> {
       ));
     });
     try{
-      await FirebaseFirestore.instance.collection('users').add({
+      await FirebaseFirestore.instance.collection('userCredential').add({
         'email':loginIdController.text
       }).then((value) => {
       Navigator.push(context, MaterialPageRoute(builder: (context)=> CreatePasswordPage(emailId: loginIdController.text,))),
@@ -108,8 +112,6 @@ class _RegisterPageState extends State<RegisterPage> {
                       ){
                         addEmail();
                       }
-
-
                   },),
                   const SizedBox(height: 150,),
                    ButtonWidget(buttonTextContent: "SUBMIT",onPressed: ()async{
