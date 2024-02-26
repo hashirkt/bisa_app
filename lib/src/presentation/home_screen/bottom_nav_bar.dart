@@ -1,5 +1,6 @@
+import 'package:bisa_app/src/presentation/dashboard_screen/dashboard_page.dart';
 import 'package:bisa_app/src/presentation/home_screen/home_page.dart';
-import 'package:bisa_app/src/presentation/home_screen/more_page.dart';
+import 'package:bisa_app/src/presentation/more_screen/more_page.dart';
 import 'package:bisa_app/src/utils/resources/asset_resources.dart';
 import 'package:bisa_app/src/utils/resources/theme.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,7 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
 
   final List<Widget> _list=[
     const HomePage(),
-    const Text("data1"),
+    const DashboardPage(),
 
   ];
 

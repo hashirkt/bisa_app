@@ -36,11 +36,12 @@ class AppTheme{
   //textStyle
   //**************************
 
-  static  TextStyle headText = TextStyle(
-    color: textColor,
+  static  TextStyle navigationText = TextStyle(
+      color: backColor,
       fontFamily: figTreeFont.fontFamily,
-      fontSize: 22,
+      fontSize: 12,
       fontWeight: FontWeight.w600);
+
 
   static  TextStyle smallHead = TextStyle(
       color: smallText,
@@ -65,12 +66,6 @@ class AppTheme{
       fontSize: 16,
       fontWeight: FontWeight.w600);
 
-  static  TextStyle navigationText = TextStyle(
-      color: backColor,
-      fontFamily: figTreeFont.fontFamily,
-      fontSize: 12,
-      fontWeight: FontWeight.w600);
-
   static  TextStyle tabText = TextStyle(
       color: textColor,
       fontFamily: figTreeFont.fontFamily,
@@ -93,6 +88,17 @@ class AppTheme{
       color: textColor,
       fontFamily: figTreeFont.fontFamily,
       fontSize: 20,
+      fontWeight: FontWeight.w600);
+
+  static  TextStyle headText = TextStyle(
+      color: textColor,
+      fontFamily: figTreeFont.fontFamily,
+      fontSize: 22,
+      fontWeight: FontWeight.w600);
+  static  TextStyle headTextWhite = TextStyle(
+      color: backColor,
+      fontFamily: figTreeFont.fontFamily,
+      fontSize: 22,
       fontWeight: FontWeight.w600);
 
 }

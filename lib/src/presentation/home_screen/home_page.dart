@@ -1,4 +1,5 @@
 import 'package:bisa_app/src/presentation/home_screen/widget/customer_name_field_widget.dart';
+import 'package:bisa_app/src/presentation/more_screen/more_page.dart';
 import 'package:bisa_app/src/utils/resources/asset_resources.dart';
 import 'package:bisa_app/src/utils/resources/theme.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,10 @@ class HomePage extends StatelessWidget {
         length: 3,
         child: Scaffold(
           appBar: AppBar(
-            title: const Image(image: AssetImage(AssetResources.appLogo),color: AppTheme.backColor,height: 22,width: 59,),
+            elevation: 0,
+            title: InkWell(
+                onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>const MorePage())),
+                child: const Image(image: AssetImage(AssetResources.appLogo),color: AppTheme.backColor,height: 22,width: 59,)),
             centerTitle: false,
             actions:  [
               IconButton(onPressed: (){}, icon: const Icon(Icons.notifications,color: AppTheme.backColor,))
@@ -38,7 +42,7 @@ class HomePage extends StatelessWidget {
                   height: 55,
 
                     width: double.infinity,
-                    padding: const EdgeInsets.only(left: 18,right: 18),
+                    //padding: const EdgeInsets.only(left: 10,right: 10),
 
                     decoration: const BoxDecoration(
                       color: AppTheme.backColor,
