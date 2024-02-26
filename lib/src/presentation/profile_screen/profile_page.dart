@@ -92,7 +92,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           PopUpTextField(initialValue: '1234567890', image: AssetImage(AssetResources.callIcon)),
                           SizedBox(height: 10,),
                         ],
-                      ), height: 240,);
+                      ), height: 240, color: AppTheme.textColor,);
                     }),),
                     ProfilePageTabBox(icon: Icons.mail_outline_rounded, text: 'EMAIL',
                     onTap: ()=>showDialog(context: context, builder: (context){
@@ -101,7 +101,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         children: [
                           PopUpTextField(initialValue: 'codignus@gmail.com', image: AssetImage(AssetResources.gmailIcon))
                         ],
-                      ), height: 100,);
+                      ), height: 100, color: AppTheme.textColor,);
                     }),
                     ),
                     ProfilePageTabBox(icon: Icons.language_rounded, text: 'SOCIAL',
@@ -117,7 +117,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 prefix: Image(image: AssetImage(AssetResources.instagram)),
                                 initialValue: 'instagramlink', image: AssetImage(AssetResources.socialIcon))
                           ],
-                      ), height: 160);
+                      ), height: 160, color: AppTheme.textColor,);
                     })
                       ,)
                   ],

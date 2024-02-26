@@ -1,11 +1,9 @@
-
 import 'package:flutter/material.dart';
-
 import '../../utils/resources/theme.dart';
 
 class CustomDataTextField extends StatelessWidget {
   final String hintText;
-  final IconData prefixIcon;
+  final Widget prefixIcon;
   const CustomDataTextField({ required this.prefixIcon,required this.hintText,
     super.key,
   });
@@ -16,7 +14,7 @@ class CustomDataTextField extends StatelessWidget {
       cursorColor: AppTheme.textColor,
       style: AppTheme.titleText,
       decoration:  InputDecoration(
-          prefixIcon:  Icon(prefixIcon),
+          prefixIcon: prefixIcon,
         suffix: IconButton(onPressed: (){}, icon: const Icon(Icons.clear,color: AppTheme.textColor,size: 20,)),
           hintText: hintText,
           hintStyle: AppTheme.smallHead,

@@ -5,7 +5,8 @@ import '../../utils/resources/theme.dart';
 class PopUpAlertDialogBox extends StatelessWidget {
   final Widget widget;
   final double height;
-  const PopUpAlertDialogBox({required this.widget,required this.height,super.key,});
+  final Color color;
+  const PopUpAlertDialogBox({required this.widget,required this.height,super.key,required this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class PopUpAlertDialogBox extends StatelessWidget {
         padding: const EdgeInsets.only(left: 20,right: 20),
         height: height,
         decoration: BoxDecoration(
-          color: AppTheme.textColor,
+          color: color,
           borderRadius: BorderRadius.circular(16),
         ),
         child:  widget
