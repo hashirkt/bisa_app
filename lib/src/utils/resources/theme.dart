@@ -84,6 +84,11 @@ class AppTheme{
       fontFamily: figTreeFont.fontFamily,
       fontSize: 16,
       fontWeight: FontWeight.w600);
+  static  TextStyle fieldText2 = TextStyle(
+      color: smallText,
+      fontFamily: figTreeFont.fontFamily,
+      fontSize: 16,
+      fontWeight: FontWeight.w600);
 
   static  TextStyle tabText = TextStyle(
       color: textColor,
@@ -104,7 +109,7 @@ class AppTheme{
       fontWeight: FontWeight.w500);
 
   static  TextStyle labelTextWhite = TextStyle(
-      color: Colors.white,
+      color: backColor,
       fontFamily: figTreeFont.fontFamily,
       fontSize: 18,
       fontWeight: FontWeight.w500);

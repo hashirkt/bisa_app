@@ -1,3 +1,4 @@
+import 'package:bisa_app/src/presentation/more_screen/create_card_screen/create_business_card_document_page.dart';
 import 'package:bisa_app/src/presentation/widget/custom_data_textfield.dart';
 import 'package:bisa_app/src/presentation/widget/search_text_field.dart';
 import 'package:bisa_app/src/utils/resources/asset_resources.dart';
@@ -24,7 +25,6 @@ class CreateBusinessCardSecondPage extends StatelessWidget {
           title: Text("Create Card",style: AppTheme.pageHead,),
         ),
         bottomNavigationBar:Container(
-
         height: 100,
         color: AppTheme.backColor,
 
@@ -50,7 +50,7 @@ class CreateBusinessCardSecondPage extends StatelessWidget {
               ),
               InkWell(
                 onTap: (){
-
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>const CreateBusinessCardDocumentPage()));
                 },
                 child: Container(
                   height: 55,
