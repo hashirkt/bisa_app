@@ -2,10 +2,16 @@ import 'package:bisa_app/src/presentation/widget/button_widget.dart';
 import 'package:bisa_app/src/utils/resources/asset_resources.dart';
 import 'package:bisa_app/src/utils/resources/theme.dart';
 import 'package:flutter/material.dart';
-import '../widget/custom_data_textfield.dart';
+import '../../widget/custom_data_textfield.dart';
 
 class CreateIndividualCardPage extends StatelessWidget {
-  const CreateIndividualCardPage({super.key});
+   CreateIndividualCardPage({super.key});
+  final TextEditingController _companyNameController= TextEditingController();
+  final TextEditingController _nameController= TextEditingController();
+  final TextEditingController _designationController= TextEditingController();
+  final TextEditingController _addressController= TextEditingController();
+  final TextEditingController _businessController= TextEditingController();
+  final TextEditingController _websiteController= TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -47,17 +53,17 @@ class CreateIndividualCardPage extends StatelessWidget {
                   ),
                 ),
               ),
-              const CustomDataTextField(prefixIcon: Icon(Icons.apartment_outlined), hintText: 'Company Name',),
+               CustomDataTextField(prefixIcon: Icon(Icons.apartment_outlined,color: AppTheme.textColor), hintText: 'Company Name', controller: _companyNameController,),
               // SizedBox(height: 10,),
-              const CustomDataTextField(prefixIcon:Icon( Icons.person_outline_outlined), hintText: "Full Name"),
+               CustomDataTextField(prefixIcon:Icon( Icons.person_outline_outlined,color: AppTheme.textColor), hintText: "Full Name", controller: _nameController,),
               // SizedBox(height: 10,),
-              const CustomDataTextField(prefixIcon: Icon(Icons.account_balance_outlined), hintText: "Designation"),
+               CustomDataTextField(prefixIcon: Icon(Icons.account_balance_outlined,color: AppTheme.textColor), hintText: "Designation", controller: _designationController,),
               //SizedBox(height: 10,),
-              const CustomDataTextField(prefixIcon:Icon( Icons.location_on_outlined,), hintText: "Address"),
+               CustomDataTextField(prefixIcon:Icon( Icons.location_on_outlined,color: AppTheme.textColor), hintText: "Address", controller: _addressController,),
               // SizedBox(height: 10,),
-              const CustomDataTextField(prefixIcon: Icon(Icons.web_outlined), hintText: "Business Details"),
+               CustomDataTextField(prefixIcon: Icon(Icons.web_outlined,color: AppTheme.textColor), hintText: "Business Details", controller: _businessController,),
               // SizedBox(height: 10,),
-              const CustomDataTextField(prefixIcon: Icon(Icons.language_rounded), hintText: "Website"),
+               CustomDataTextField(prefixIcon: Icon(Icons.language_rounded,color: AppTheme.textColor), hintText: "Website", controller: _websiteController,),
               const SizedBox(height: 70,),
               const ButtonWidget(buttonTextContent: "NEXT")
             ],

@@ -106,15 +106,17 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                     ProfilePageTabBox(icon: Icons.language_rounded, text: 'SOCIAL',
                     onTap: ()=>showDialog(context: context, builder: (context){
-                      return const PopUpAlertDialogBox(widget: Column(
+                      return  const PopUpAlertDialogBox(widget: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             PopUpTextField(
                               prefix: Image(image: AssetImage(AssetResources.faceBook)),
+                                prefixIconConstraints: BoxConstraints(maxWidth: 23,maxHeight: 23),
                                 initialValue: 'facebooklink', image: AssetImage(AssetResources.socialIcon)),
                             SizedBox(height: 10,),
                             PopUpTextField(
                                 prefix: Image(image: AssetImage(AssetResources.instagram)),
+                                prefixIconConstraints: BoxConstraints(maxWidth: 23,maxHeight: 23),
                                 initialValue: 'instagramlink', image: AssetImage(AssetResources.socialIcon))
                           ],
                       ), height: 160, color: AppTheme.textColor,);

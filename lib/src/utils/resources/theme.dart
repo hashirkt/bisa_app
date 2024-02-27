@@ -55,6 +55,11 @@ class AppTheme{
       fontFamily: figTreeFont.fontFamily,
       fontSize: 16,
       fontWeight: FontWeight.w500);
+  static  TextStyle smallHeadWhite = TextStyle(
+      color: backColor,
+      fontFamily: figTreeFont.fontFamily,
+      fontSize: 16,
+      fontWeight: FontWeight.w500);
 
 
   static  TextStyle smallHeadGreen = TextStyle(

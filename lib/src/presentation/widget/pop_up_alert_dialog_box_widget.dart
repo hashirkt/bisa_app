@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../utils/resources/theme.dart';
-
 class PopUpAlertDialogBox extends StatelessWidget {
   final Widget widget;
   final double height;

@@ -9,8 +9,10 @@ class AssetResources{
   static const callIcon = "assets/images/call_icon.png";
   static const gmailIcon = "assets/images/gmail_img.png";
   static const socialIcon = "assets/images/social_media_icon.png";
-  static const faceBook = "assets/images/facebook_icon.png";
-  static const instagram = "assets/images/instagram_icon.png";
+  static const faceBook = "assets/images/facebook.png";
+  static const instagram = "assets/images/instagram.png";
+  static const behance = "assets/images/behance.png";
+  static const whatsApp = "assets/images/whatsApp.png";
 
   static const myCard = "assets/images/my_card.png";
   static const payNow = "assets/images/pay_now.png";

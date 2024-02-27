@@ -37,7 +37,12 @@ class HomePage extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: AppTheme.backColor,
                       borderRadius: BorderRadius.circular(30),),
-                    child: const SearchTextField()
+                    child:  SearchTextField(
+                      hintText: "Search Message",
+                      cursorColor: AppTheme.textColor,
+                      hintStyle:AppTheme.smallHead,
+                      icon:   const Icon(Icons.search,color: AppTheme.textColor,),
+                    )
                 ),
                 Container(
                   height: 55,

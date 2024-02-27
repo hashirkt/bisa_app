@@ -1,7 +1,7 @@
 import 'package:bisa_app/src/presentation/home_screen/bottom_nav_bar.dart';
 import 'package:bisa_app/src/presentation/home_screen/widget/menu_text_button_widget.dart';
-import 'package:bisa_app/src/presentation/more_screen/create_business_card_page.dart';
-import 'package:bisa_app/src/presentation/more_screen/create_individual_card_page.dart';
+import 'package:bisa_app/src/presentation/more_screen/create_card_screen/create_business_card_page.dart';
+import 'package:bisa_app/src/presentation/more_screen/create_card_screen/create_individual_card_page.dart';
 import 'package:bisa_app/src/presentation/widget/pop_up_alert_dialog_box_widget.dart';
 import 'package:bisa_app/src/utils/resources/asset_resources.dart';
 import 'package:bisa_app/src/utils/resources/theme.dart';
@@ -47,7 +47,11 @@ class MorePage extends StatelessWidget {
                    mainAxisAlignment: MainAxisAlignment.center,
                    children: [
                     InkWell(
-                      onTap:()=> Navigator.push(context, MaterialPageRoute(builder: (context)=>const CreateBusinessCardPage())),
+                      onTap:()
+                     { Navigator.pop(context);
+                       Navigator.push(context, MaterialPageRoute(builder: (context)=> CreateBusinessCardPage()));
+
+                     },
                       child: Card(
                         elevation:2,
                         child: Container(
@@ -73,7 +77,9 @@ class MorePage extends StatelessWidget {
                       ),
                     ),
                     InkWell(
-                      onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>const CreateIndividualCardPage())),
+                      onTap: (){
+                 Navigator.pop(context);
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=> CreateIndividualCardPage()));},
                       child: Card(
                         elevation:2,
                         child: Container(
@@ -92,14 +98,15 @@ class MorePage extends StatelessWidget {
                             children: [
                               const Icon(Icons.person,color: AppTheme.textColor,),
                               const SizedBox(width: 20,),
-                              Text("Create Business",style: AppTheme.tabText,)
+                              Text("Create Individual",style: AppTheme.tabText,)
                             ],
                           ),
                         ),
                       ),
                     ),
                    ],
-                 ), height: 250, color: AppTheme.backColor,);
+                 ), height: 250, color: AppTheme.backColor,
+                 );
                }),),
               const MenuTextButtonWidget(buttonText: 'My Card', buttonImage: AssetImage(AssetResources.myCard)),
               const MenuTextButtonWidget(buttonText: 'Pay Now', buttonImage:AssetImage(AssetResources.payNow),),
