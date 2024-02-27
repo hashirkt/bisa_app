@@ -43,8 +43,27 @@ class AppTheme{
       fontWeight: FontWeight.w600);
 
 
+  static  TextStyle profilePageTab = TextStyle(
+      color: textColor,
+      fontFamily: figTreeFont.fontFamily,
+      fontSize: 14,
+      fontWeight: FontWeight.w600);
+
+
   static  TextStyle smallHead = TextStyle(
       color: smallText,
+      fontFamily: figTreeFont.fontFamily,
+      fontSize: 16,
+      fontWeight: FontWeight.w500);
+  static  TextStyle smallHeadWhite = TextStyle(
+      color: backColor,
+      fontFamily: figTreeFont.fontFamily,
+      fontSize: 16,
+      fontWeight: FontWeight.w500);
+
+
+  static  TextStyle smallHeadGreen = TextStyle(
+      color: Colors.green,
       fontFamily: figTreeFont.fontFamily,
       fontSize: 16,
       fontWeight: FontWeight.w500);
@@ -77,6 +96,18 @@ class AppTheme{
       fontFamily: figTreeFont.fontFamily,
       fontSize: 18,
       fontWeight: FontWeight.w600);
+
+  static  TextStyle labelText = TextStyle(
+      color: smallText,
+      fontFamily: figTreeFont.fontFamily,
+      fontSize: 18,
+      fontWeight: FontWeight.w500);
+
+  static  TextStyle labelTextWhite = TextStyle(
+      color: Colors.white,
+      fontFamily: figTreeFont.fontFamily,
+      fontSize: 18,
+      fontWeight: FontWeight.w500);
 
   static  TextStyle menuButtonText = TextStyle(
       color: backColor,

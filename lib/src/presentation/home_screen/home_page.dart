@@ -1,5 +1,6 @@
 import 'package:bisa_app/src/presentation/home_screen/widget/customer_name_field_widget.dart';
 import 'package:bisa_app/src/presentation/more_screen/more_page.dart';
+import 'package:bisa_app/src/presentation/profile_screen/profile_page.dart';
 import 'package:bisa_app/src/utils/resources/asset_resources.dart';
 import 'package:bisa_app/src/utils/resources/theme.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +37,12 @@ class HomePage extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: AppTheme.backColor,
                       borderRadius: BorderRadius.circular(30),),
-                    child: const SearchTextField()
+                    child:  SearchTextField(
+                      hintText: "Search Message",
+                      cursorColor: AppTheme.textColor,
+                      hintStyle:AppTheme.smallHead,
+                      icon:   const Icon(Icons.search,color: AppTheme.textColor,),
+                    )
                 ),
                 Container(
                   height: 55,
@@ -71,29 +77,29 @@ class HomePage extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.only(left: 20,right: 20),
                 width: double.infinity,
-                child: const SingleChildScrollView(
+                child:  SingleChildScrollView(
                   child: Column(
                     children: [
-                      CustomerNameField(nameText: 'Customer Name',
+                      const CustomerNameField(nameText: 'Customer Name',
                         companyNameText: 'Customer Company Private Limited',
                         checkedIcon: Icons.check_circle, profileImage: AssetImage(AssetResources.userDp),),
-                      CustomerNameField(nameText: 'Customer Name',
-                        companyNameText: 'Customer Company Private Limited', profileImage: AssetImage(AssetResources.user1Dp),
+                      CustomerNameField(nameText: 'Customer Name',onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>const ProfilePage())),
+                        companyNameText: 'Customer Company Private Limited', profileImage: const AssetImage(AssetResources.user1Dp),
                       ),
-                      CustomerNameField(nameText: 'Customer Name',
+                      const CustomerNameField(nameText: 'Customer Name',
                         companyNameText: 'Customer Company Private Limited',
                         checkedIcon: Icons.check_circle, profileImage: AssetImage(AssetResources.user1Dp),),
-                      CustomerNameField(nameText: 'Customer Name',
+                      const CustomerNameField(nameText: 'Customer Name',
                         companyNameText: 'Customer Company Private Limited', profileImage: AssetImage(AssetResources.userDp),),
-                      CustomerNameField(nameText: 'Customer Name',
+                      const CustomerNameField(nameText: 'Customer Name',
                         companyNameText: 'Customer Company Private Limited',
                         checkedIcon: Icons.check_circle, profileImage: AssetImage(AssetResources.user2Dp),),
-                      CustomerNameField(nameText: 'Customer Name',
+                      const CustomerNameField(nameText: 'Customer Name',
                         companyNameText: 'Customer Company Private Limited', profileImage: AssetImage(AssetResources.userDp),),
-                      CustomerNameField(nameText: 'Customer Name',
+                      const CustomerNameField(nameText: 'Customer Name',
                         companyNameText: 'Customer Company Private Limited',
                         checkedIcon: Icons.check_circle, profileImage: AssetImage(AssetResources.user1Dp),),
-                      CustomerNameField(nameText: 'Customer Name',
+                      const CustomerNameField(nameText: 'Customer Name',
                         companyNameText: 'Customer Company Private Limited', profileImage: AssetImage(AssetResources.userDp),),
                     ],
                   ),
