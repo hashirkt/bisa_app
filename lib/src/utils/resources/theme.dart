@@ -13,6 +13,7 @@ class AppTheme{
   static const Color backColor = Colors.white;
   static const Color textColor = Colors.black;
   static const Color smallText = Colors.grey;
+  static const Color blueColor = Color(0xff4B73E1);
 
 
 
@@ -41,6 +42,11 @@ class AppTheme{
       fontFamily: figTreeFont.fontFamily,
       fontSize: 12,
       fontWeight: FontWeight.w600);
+  static  TextStyle optionsText = TextStyle(
+      color: smallText,
+      fontFamily: figTreeFont.fontFamily,
+      fontSize: 12,
+      fontWeight: FontWeight.w500);
 
 
   static  TextStyle profilePageTab = TextStyle(
@@ -64,6 +70,11 @@ class AppTheme{
 
   static  TextStyle smallHeadGreen = TextStyle(
       color: Colors.green,
+      fontFamily: figTreeFont.fontFamily,
+      fontSize: 16,
+      fontWeight: FontWeight.w500);
+  static  TextStyle smallHeadBlue = TextStyle(
+      color: blueColor,
       fontFamily: figTreeFont.fontFamily,
       fontSize: 16,
       fontWeight: FontWeight.w500);

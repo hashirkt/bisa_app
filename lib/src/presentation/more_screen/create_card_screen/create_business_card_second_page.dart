@@ -27,7 +27,6 @@ class CreateBusinessCardSecondPage extends StatelessWidget {
         bottomNavigationBar:Container(
         height: 100,
         color: AppTheme.backColor,
-
         child: Padding(
           padding: const EdgeInsets.only(left: 30,right: 30),
           child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -112,7 +111,6 @@ class CreateBusinessCardSecondPage extends StatelessWidget {
                         child: Column(
                           children: [
                             Container(
-
                                 margin: const EdgeInsets.only(top: 15,),
                                 padding: const EdgeInsets.only(left: 25,right: 5),
 

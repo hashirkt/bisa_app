@@ -13,6 +13,9 @@ class AssetResources{
   static const instagram = "assets/images/instagram.png";
   static const behance = "assets/images/behance.png";
   static const whatsApp = "assets/images/whatsApp.png";
+  static const camera = "assets/images/camera.png";
+  static const gallery = "assets/images/gallery.png";
+  static const document = "assets/images/document.png";
 
   static const myCard = "assets/images/my_card.png";
   static const payNow = "assets/images/pay_now.png";
