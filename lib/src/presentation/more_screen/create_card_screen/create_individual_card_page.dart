@@ -1,3 +1,4 @@
+import 'package:bisa_app/src/presentation/more_screen/create_card_screen/create_individual_card_second_page.dart';
 import 'package:bisa_app/src/presentation/widget/button_widget.dart';
 import 'package:bisa_app/src/utils/resources/asset_resources.dart';
 import 'package:bisa_app/src/utils/resources/theme.dart';
@@ -22,7 +23,7 @@ class CreateIndividualCardPage extends StatelessWidget {
         leadingWidth: 60,
         leading: IconButton(onPressed: (){
           Navigator.pop(context);
-        }, icon: const Icon(Icons.keyboard_arrow_left_rounded,size: 30,)),
+        }, icon: const Icon(Icons.keyboard_arrow_left_rounded,size: 30,color: AppTheme.textColor,)),
         title: Text("Create Card",style: AppTheme.pageHead,),
       ),
       body: Container(
@@ -53,19 +54,19 @@ class CreateIndividualCardPage extends StatelessWidget {
                   ),
                 ),
               ),
-               CustomDataTextField(prefixIcon: Icon(Icons.apartment_outlined,color: AppTheme.textColor), hintText: 'Company Name', controller: _companyNameController,),
+               CustomDataTextField(prefixIcon: const Icon(Icons.apartment_outlined,color: AppTheme.textColor), hintText: 'Company Name', controller: _companyNameController,),
               // SizedBox(height: 10,),
-               CustomDataTextField(prefixIcon:Icon( Icons.person_outline_outlined,color: AppTheme.textColor), hintText: "Full Name", controller: _nameController,),
+               CustomDataTextField(prefixIcon:const Icon( Icons.person_outline_outlined,color: AppTheme.textColor), hintText: "Full Name", controller: _nameController,),
               // SizedBox(height: 10,),
-               CustomDataTextField(prefixIcon: Icon(Icons.account_balance_outlined,color: AppTheme.textColor), hintText: "Designation", controller: _designationController,),
+               CustomDataTextField(prefixIcon: const Icon(Icons.account_balance_outlined,color: AppTheme.textColor), hintText: "Designation", controller: _designationController,),
               //SizedBox(height: 10,),
-               CustomDataTextField(prefixIcon:Icon( Icons.location_on_outlined,color: AppTheme.textColor), hintText: "Address", controller: _addressController,),
+               CustomDataTextField(prefixIcon:const Icon( Icons.location_on_outlined,color: AppTheme.textColor), hintText: "Address", controller: _addressController,),
               // SizedBox(height: 10,),
-               CustomDataTextField(prefixIcon: Icon(Icons.web_outlined,color: AppTheme.textColor), hintText: "Business Details", controller: _businessController,),
+               CustomDataTextField(prefixIcon: const Icon(Icons.web_outlined,color: AppTheme.textColor), hintText: "Business Details", controller: _businessController,),
               // SizedBox(height: 10,),
-               CustomDataTextField(prefixIcon: Icon(Icons.language_rounded,color: AppTheme.textColor), hintText: "Website", controller: _websiteController,),
+               CustomDataTextField(prefixIcon: const Icon(Icons.language_rounded,color: AppTheme.textColor), hintText: "Website", controller: _websiteController,),
               const SizedBox(height: 70,),
-              const ButtonWidget(buttonTextContent: "NEXT")
+               ButtonWidget(buttonTextContent: "NEXT",onPressed: ()=> Navigator.push(context, MaterialPageRoute(builder: (context)=>const CreateIndividualCardSecondPage())))
             ],
           ),
         ),
