@@ -17,7 +17,7 @@ class ButtonWidget extends StatelessWidget {
         width: double.infinity,
         decoration: BoxDecoration(
           color: AppTheme.textColor,
-          borderRadius: BorderRadius.circular(25)
+          borderRadius: BorderRadius.circular(50)
         ),
         child: Padding(padding: const EdgeInsets.only(top: 15,bottom: 15),
         child: Center(child: Text(buttonTextContent,style: AppTheme.buttonText,)),

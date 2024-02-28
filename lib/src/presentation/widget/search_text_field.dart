@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '../../utils/resources/theme.dart';
-
 class SearchTextField extends StatelessWidget {
-  const SearchTextField({
+  final String hintText;
+  final TextStyle hintStyle;
+  final Color cursorColor;
+  final Widget icon;
+  final TextStyle? style;
+  const SearchTextField({required this.hintText,required this.cursorColor,required this.icon,required this.hintStyle,this.style,
     super.key,
   });
 
@@ -11,15 +14,16 @@ class SearchTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       textAlignVertical: TextAlignVertical.center,
-      cursorColor: AppTheme.textColor,
+      cursorColor: cursorColor,
+      style: style,
       decoration:  InputDecoration(
-          hintText: "Search Message",
-          hintStyle: AppTheme.smallHead,
+          hintText: hintText,
+          hintStyle: hintStyle,
           focusedBorder: InputBorder.none,
           enabledBorder: InputBorder.none,
           focusedErrorBorder: InputBorder.none,
           errorBorder: InputBorder.none,
-          suffixIcon: const Icon(Icons.search,color: AppTheme.smallText,)
+          suffixIcon:icon
       ),
     );
   }
