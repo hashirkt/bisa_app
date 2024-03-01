@@ -6,6 +6,7 @@ import 'package:bisa_app/src/utils/resources/theme.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../utils/resources/asset_resources.dart';
 import '../otp_screen/otp_page.dart';
 
@@ -87,20 +88,21 @@ class _RegisterPageState extends State<RegisterPage> {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         body:Container(
-          padding:const EdgeInsets.only(left: 20,right: 20),
-          height: double.infinity,
-          width: double.infinity,
+          padding: EdgeInsets.symmetric(horizontal: 20.w),
           color: AppTheme.backColor,
           child: SingleChildScrollView(
             child: Form(
               key: _signUpKey,
               child: Column(
                 children: [
-                  const SizedBox(height: 50,),
-                  const HeadContainer(
-                      headingText: "REGISTER",
-                      smallTitleText: "Register your Account",image: AssetImage(AssetResources.appLogo),containerHeight: 50,),
-                  const SizedBox(height: 150,),
+                   SizedBox(height: 240.h,),
+                   Padding(
+                     padding: EdgeInsets.symmetric(horizontal: 101.w),
+                     child: HeadContainer(
+                        headingText: "REGISTER",
+                        smallTitleText: "Register your Account",image: AssetImage(AssetResources.appLogo),containerHeight: 163.h,containerWidth: 187.w,logoWidth: 133.w,logoHeight: 48.h,),
+                   ),
+                   SizedBox(height: 166.h,),
                   UserIdTextField(controller: loginIdController,textInputAction:TextInputAction.done,onSubmitted: (value){
                       if(_signUpKey.currentState!.validate()&&
                           loginIdController.text.contains(RegExp(r'^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$'))
@@ -113,7 +115,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         addEmail();
                       }
                   },),
-                  const SizedBox(height: 150,),
+                   SizedBox(height: 150.h,),
                    ButtonWidget(buttonTextContent: "SUBMIT",onPressed: ()async{
                      if(_signUpKey.currentState!.validate()&&
                      loginIdController.text.contains(RegExp(r'^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$'))

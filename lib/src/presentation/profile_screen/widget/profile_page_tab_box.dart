@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../utils/resources/theme.dart';
 
 class ProfilePageTabBox extends StatelessWidget {
@@ -14,20 +15,20 @@ class ProfilePageTabBox extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-          height: 55,
-          width: 105,
+          height: 50.h,
+          width: 116.w,
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(8.r),
               color: AppTheme.backColor,
               boxShadow: const [BoxShadow(
                   color: AppTheme.smallText,
-                  blurRadius: 3
+                  blurRadius: 1.5
               )]
           ),
           child: Row(mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(icon,color: AppTheme.textColor,),
-              const SizedBox(width: 5,),
+              Icon(icon,color: AppTheme.textColor,size: 16.sp,),
+               SizedBox(width: 9.w,),
               Text(text,style: AppTheme.profilePageTab,)
             ],
           )

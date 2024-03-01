@@ -7,6 +7,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'dart:developer';
+
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 class CreatePasswordPage extends StatefulWidget {
   final String? phoneNumber;
   final String? emailId;
@@ -112,21 +114,19 @@ class _CreatePasswordPageState extends State<CreatePasswordPage> {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         body: Container(
-          padding: const EdgeInsets.only(left: 20,right: 20),
-          height: double.infinity,
-          width: double.infinity,
+          padding:  EdgeInsets.symmetric(horizontal: 20.w),
           color: AppTheme.backColor,
           child: SingleChildScrollView(
             child: Form(
               key: _passPageKey,
               child: Column(
                 children: [
-                  const SizedBox(height: 30,),
-                    const HeadContainer(headingText: "SET YOUR PASSWORD", smallTitleText: "Password will be six characters",),
-                  const SizedBox(height: 150,),
+                   SizedBox(height: 200.h,),
+                     HeadContainer(headingText: "SET YOUR PASSWORD", smallTitleText: "Password will be six characters",containerHeight: 106.h,containerWidth: 247.w),
+                   SizedBox(height: 163.h,),
                   PasswordTextField(passController: _passController,textInputAction: TextInputAction.next,),
                   PasswordTextField(passController: _confirmController,textInputAction: TextInputAction.done,),
-                  const SizedBox(height: 120,),
+                   SizedBox(height: 200.h,),
                  ButtonWidget(buttonTextContent: "GO",onPressed: (){
                    if(_passPageKey.currentState!.validate()&&
                        _confirmController.text!=_passController.text

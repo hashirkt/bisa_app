@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../utils/resources/theme.dart';
 
 class PopUpTextField extends StatelessWidget {
@@ -11,22 +12,21 @@ class PopUpTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-
       initialValue: initialValue,
       cursorColor: AppTheme.backColor,
       style: AppTheme.labelTextWhite,
       decoration:  InputDecoration(
         prefixIcon: prefix,
           prefixIconConstraints: prefixIconConstraints,
-          suffixIcon: Image(image: image,),
-          focusedBorder: const UnderlineInputBorder(
-            borderSide: BorderSide(color: AppTheme.backColor,width: 0.2),
+          suffixIcon: Image(image: image,width: 23.w,height: 23.h,),
+          focusedBorder:  UnderlineInputBorder(
+            borderSide: BorderSide(color: AppTheme.backColor,width: 0.2.w),
           ),
-          enabledBorder: const UnderlineInputBorder(
-            borderSide: BorderSide(color: AppTheme.smallText,width: 0.2),
+          enabledBorder:  UnderlineInputBorder(
+            borderSide: BorderSide(color: AppTheme.smallText,width: 0.2.w),
           ),
-          errorBorder: const UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.red,width: 0.2),
+          errorBorder:  UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.red,width: 0.2.w),
           )
       ),
     );

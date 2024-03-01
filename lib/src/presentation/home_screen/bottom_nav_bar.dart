@@ -4,6 +4,7 @@ import 'package:bisa_app/src/presentation/more_screen/more_page.dart';
 import 'package:bisa_app/src/utils/resources/asset_resources.dart';
 import 'package:bisa_app/src/utils/resources/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BottomNavBarPage extends StatefulWidget {
   const BottomNavBarPage({super.key});
@@ -44,28 +45,30 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
         endDrawer: const MorePage(),
         bottomNavigationBar:
         Container(
-          padding: const EdgeInsets.only(bottom: 20,left: 20,right: 20),
-          width: double.infinity,
+          height: 79.h,
+          padding:  EdgeInsets.only(bottom: 20.h,left: 20.w,right: 20.w),
           decoration: const BoxDecoration(
-
+            color: AppTheme.backColor,
           ),
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(30),
+            borderRadius: BorderRadius.circular(30.r),
             child: BottomNavigationBar(
               type: BottomNavigationBarType.fixed,
               backgroundColor: AppTheme.textColor,
+              selectedLabelStyle: AppTheme.navigationText,
+              unselectedLabelStyle: AppTheme.navigationTextGrey,
               elevation: 0,
-              items:  const <BottomNavigationBarItem>[
+              items:   <BottomNavigationBarItem>[
                 BottomNavigationBarItem(
-                    icon: ImageIcon(AssetImage(AssetResources.homeIcon)),
+                    icon: ImageIcon(AssetImage(AssetResources.homeIcon),size: 22.sp,),
                     label: "Home",
                 ),
                 BottomNavigationBarItem(
-                    icon: ImageIcon(AssetImage(AssetResources.dashboardIcon)),
+                    icon: ImageIcon(AssetImage(AssetResources.dashboardIcon),size: 22.sp,),
                     label: "Dashboard"
                 ),
                 BottomNavigationBarItem(
-                    icon: ImageIcon(AssetImage(AssetResources.moreIcon)),
+                    icon: ImageIcon(AssetImage(AssetResources.moreIcon),size: 22.sp,),
                     label: "More",
 
                 ),

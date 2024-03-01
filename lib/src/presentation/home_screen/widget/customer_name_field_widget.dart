@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../utils/resources/theme.dart';
 
@@ -16,47 +17,43 @@ class CustomerNameField extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        height: 75,
-        decoration: const BoxDecoration(
-          //color: Colors.blue,
-            border: Border(bottom: BorderSide(
-                color: AppTheme.smallText,width: 1
-            ))
+        height: 62.h,
+        width: 390.w,
+        decoration:  BoxDecoration(
+          border: Border(bottom: BorderSide(color: AppTheme.smallText,width: 0.5.w))
+          //color: Colors.blue
         ),
-        width: double.infinity,
         child: Column(
           children: [
-            const SizedBox(height: 10,),
-            Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            Row(
               children: [
                 Container(
-                  height: 50,
-                  width: 50,
+                  height: 50.h,
+                  width: 50.w,
                   decoration: BoxDecoration(
                     image: DecorationImage(image: profileImage,fit: BoxFit.cover),
-                      borderRadius: BorderRadius.circular(100),
-                      border: Border.all(color: AppTheme.smallText,width: 1)
+                      borderRadius: BorderRadius.circular(100.r),
+                      border: Border.all(color: AppTheme.smallText,width: 0.5.w)
                   ),
                 ),
-                const SizedBox(width: 20,),
+                 SizedBox(width: 12.w,),
                 Expanded(
-                  child: Column(mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  child: Column(crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(nameText,style: AppTheme.tabText,),
-                           Icon(checkedIcon,color: Colors.green,)
+                           Icon(checkedIcon,color: Colors.green,size: 18.sp,)
                         ],
                       ),
-                      const SizedBox(height: 5,),
+                       SizedBox(height: 6.h,),
                       Text(companyNameText,style: AppTheme.smallHead,)
                     ],
                   ),
                 )
               ],
             ),
-            const SizedBox(height: 10,),
+            // SizedBox(height: 12.h,),
           ],
         ),
       ),

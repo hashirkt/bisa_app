@@ -6,6 +6,7 @@ import 'package:bisa_app/src/utils/resources/theme.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pinput/pinput.dart';
 
 class OTPPage extends StatefulWidget {
@@ -25,20 +26,21 @@ class _OTPPageState extends State<OTPPage> {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         body: Container(
-          padding: const EdgeInsets.only(left: 20,right: 20),
-          height: double.infinity,
-          width: double.infinity,
+          padding:  EdgeInsets.symmetric(horizontal: 20.w),
           color: AppTheme.backColor,
           child:  SingleChildScrollView(
             child: Column(
               children: [
-                const SizedBox(height: 80,),
-                const HeadContainer(headingText: "ENTER YOUR OTP",
-                    smallTitleText: "Otp Will be Send to Your Registered Email \nor Mobile Number",
-                    image: AssetImage(AssetResources.otpIcon),containerHeight: 80,),
-                const SizedBox(height: 30,),
+                 SizedBox(height: 100.h,),
+                 Padding(
+                   padding:  EdgeInsets.symmetric(horizontal: 45.w),
+                   child: HeadContainer(headingText: "ENTER YOUR OTP",
+                      smallTitleText: "Otp Will be Send to Your Registered Email or Mobile Number",
+                      image: AssetImage(AssetResources.otpIcon),containerHeight: 311.h,containerWidth: 299.w,logoHeight: 179.h,logoWidth: 100.w),
+                 ),
+                 SizedBox(height: 118.h,),
                 Container(
-                  height: 200,
+                  height: 59.h,
                   width: double.infinity,
                   //color: Colors.blue,
                   child: Pinput(
@@ -47,7 +49,7 @@ class _OTPPageState extends State<OTPPage> {
 
                   ),
                 ),
-                const SizedBox(height: 120,),
+                 SizedBox(height: 235.h,),
                 ButtonWidget(buttonTextContent: "GO",onPressed: ()async{
                   showDialog(context: context, builder: (context){
                     return const Center(child: CircularProgressIndicator(
@@ -66,7 +68,6 @@ class _OTPPageState extends State<OTPPage> {
                         context) =>  CreatePasswordPage(phoneNumber: widget.phoneNumber,)));
                   });
                 })
-
               ],
             ),
           ),

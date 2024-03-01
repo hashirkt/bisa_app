@@ -4,7 +4,7 @@ import 'package:bisa_app/src/presentation/profile_screen/profile_page.dart';
 import 'package:bisa_app/src/utils/resources/asset_resources.dart';
 import 'package:bisa_app/src/utils/resources/theme.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../widget/search_text_field.dart';
 
 class HomePage extends StatelessWidget {
@@ -21,44 +21,46 @@ class HomePage extends StatelessWidget {
             elevation: 0,
             title: InkWell(
                 onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>const MorePage())),
-                child: const Image(image: AssetImage(AssetResources.appLogo),color: AppTheme.backColor,height: 22,width: 59,)),
+                child:  Padding(
+                  padding:  EdgeInsets.only(left: 8.w),
+                  child: Image(image: const AssetImage(AssetResources.appLogo),color: AppTheme.backColor,height: 22.h,width: 59.w,),
+                )),
             centerTitle: false,
             actions:  [
-              IconButton(onPressed: (){}, icon: const Icon(Icons.notifications,color: AppTheme.backColor,))
+              IconButton(onPressed: (){}, icon:  Icon(Icons.notifications,color: AppTheme.backColor,size: 24.sp,),padding: EdgeInsets.only(right: 8.w),)
             ],
             backgroundColor: AppTheme.textColor,
-            bottom:  PreferredSize(preferredSize: const Size.square(130), child: Column(
+            bottom:  PreferredSize(preferredSize:  Size.square(150.h), child: Column(
               children: [
                 Container(
 
-                  margin: const EdgeInsets.only(bottom: 15,left: 40,right: 40,),
-                    padding: const EdgeInsets.only(left: 25,right: 5),
+                  margin:  EdgeInsets.only(bottom: 20.h,left: 20.w,right: 20.w,),
+                    padding:  EdgeInsets.only(left: 20.w,right: 5.w),
 
                     decoration: BoxDecoration(
                       color: AppTheme.backColor,
-                      borderRadius: BorderRadius.circular(30),),
+                      borderRadius: BorderRadius.circular(20.r),),
                     child:  SearchTextField(
                       hintText: "Search Message",
                       cursorColor: AppTheme.textColor,
                       hintStyle:AppTheme.smallHead,
+                      style: AppTheme.fieldText,
                       icon:   const Icon(Icons.search,color: AppTheme.textColor,),
                     )
                 ),
                 Container(
-                  height: 55,
-
+                  height: 59.h,
                     width: double.infinity,
                     //padding: const EdgeInsets.only(left: 10,right: 10),
-
                     decoration: const BoxDecoration(
                       color: AppTheme.backColor,
                       ),
                   child:  TabBar(
-                    indicatorPadding: const EdgeInsets.only(left: 10,right: 10),
+                    indicatorPadding:  EdgeInsets.only(left: 20.w,right: 20.w),
                     dividerColor: AppTheme.backColor,
                     indicatorSize: TabBarIndicatorSize.tab,
                     unselectedLabelColor: AppTheme.smallText,
-                    unselectedLabelStyle: AppTheme.smallHead,
+                    unselectedLabelStyle: AppTheme.labelText,
                     indicatorColor: Colors.black87,
                       labelColor: AppTheme.textColor,
                       labelStyle: AppTheme.tabText,
@@ -75,38 +77,48 @@ class HomePage extends StatelessWidget {
           body: TabBarView(
             children: <Widget>[
               Container(
-                padding: const EdgeInsets.only(left: 20,right: 20),
+                color: AppTheme.backColor,
+                padding:  EdgeInsets.symmetric(horizontal: 20.w),
                 width: double.infinity,
                 child:  SingleChildScrollView(
                   child: Column(
                     children: [
+                      SizedBox(height: 20.h,),
                       const CustomerNameField(nameText: 'Customer Name',
                         companyNameText: 'Customer Company Private Limited',
                         checkedIcon: Icons.check_circle, profileImage: AssetImage(AssetResources.userDp),),
+                      SizedBox(height: 20.h,),
                       CustomerNameField(nameText: 'Customer Name',onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>const ProfilePage())),
                         companyNameText: 'Customer Company Private Limited', profileImage: const AssetImage(AssetResources.user1Dp),
                       ),
+                      SizedBox(height: 20.h,),
                       const CustomerNameField(nameText: 'Customer Name',
                         companyNameText: 'Customer Company Private Limited',
                         checkedIcon: Icons.check_circle, profileImage: AssetImage(AssetResources.user1Dp),),
+                      SizedBox(height: 20.h,),
                       const CustomerNameField(nameText: 'Customer Name',
                         companyNameText: 'Customer Company Private Limited', profileImage: AssetImage(AssetResources.userDp),),
+                      SizedBox(height: 20.h,),
                       const CustomerNameField(nameText: 'Customer Name',
                         companyNameText: 'Customer Company Private Limited',
                         checkedIcon: Icons.check_circle, profileImage: AssetImage(AssetResources.user2Dp),),
+                      SizedBox(height: 20.h,),
                       const CustomerNameField(nameText: 'Customer Name',
                         companyNameText: 'Customer Company Private Limited', profileImage: AssetImage(AssetResources.userDp),),
+                      SizedBox(height: 20.h,),
                       const CustomerNameField(nameText: 'Customer Name',
                         companyNameText: 'Customer Company Private Limited',
                         checkedIcon: Icons.check_circle, profileImage: AssetImage(AssetResources.user1Dp),),
+                      SizedBox(height: 20.h,),
                       const CustomerNameField(nameText: 'Customer Name',
                         companyNameText: 'Customer Company Private Limited', profileImage: AssetImage(AssetResources.userDp),),
+                      SizedBox(height: 20.h,),
                     ],
                   ),
                 ),
               ),
-              const Icon(Icons.directions_transit, size: 350),
-              const Icon(Icons.directions_car, size: 350),
+              Center(child: const Text("Saved")),
+              Center(child: const Text("Promotions")),
             ],
           ),
         ),
